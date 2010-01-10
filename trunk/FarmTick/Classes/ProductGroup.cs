@@ -4,6 +4,9 @@ using System.Text;
 
 namespace FarmTick
 {
+    /// <summary>
+    /// 产品组，包含同一用户在一段短时间内成熟的产品列表
+    /// </summary>
     [Serializable]
     public abstract class ProductGroup : IComparable
     {
@@ -19,6 +22,13 @@ namespace FarmTick
         public int OwnerId { get { return Parent.OwnerId; } }
         public string OwnerName { get { return Parent.OwnerName; } }
 
+        /// <summary>
+        /// 产品组构造函数
+        /// </summary>
+        /// <param name="snapshottime">快照时间</param>
+        /// <param name="parent">所属用户ID</param>
+        /// <param name="ripetime">产品组内最早成熟时间</param>
+        /// <param name="ripename">产品组内最早成熟产品名</param>
         public ProductGroup(DateTime snapshottime, Farm parent, int ripetime, string ripename)
         {
             SnapshotTime = snapshottime;
@@ -27,7 +37,9 @@ namespace FarmTick
             RipeName = ripename;
         }
 
-        // 获取产品的期望价值(可重写)
+        /// <summary>
+        /// 获取产品组内产品的期望价值(可重写)
+        /// </summary>
         public virtual int ExpectValue
         {
             get
@@ -46,8 +58,9 @@ namespace FarmTick
             }
         }
 
-
-        // 获取组内产品的概要表示字符串(可重写)
+        /// <summary>
+        /// 获取产品组内所有产品的概要表示字符串(可重写)
+        /// </summary>
         public virtual string ProductString
         {
             get
@@ -66,7 +79,9 @@ namespace FarmTick
             }
         }
 
-        // 获取组内产品的成熟字符串(可重写)
+        /// <summary>
+        /// 获取产品组内所有产品的成熟字符串(可重写)
+        /// </summary>
         public virtual string RipingString
         {
             get
@@ -75,7 +90,12 @@ namespace FarmTick
             }
         }
 
-        // 比较成熟时间或价值(可重写)
+        // 
+        /// <summary>
+        /// 实现IComparable接口，比较成熟时间(可重写)
+        /// </summary>
+        /// <param name="group"></param>
+        /// <returns></returns>
         public int CompareTo(object group)
         {
             if (group is ProductGroup)
@@ -84,7 +104,12 @@ namespace FarmTick
                 return 0;
         }
 
-        // 将以秒表示的时间转换为适当的显示格式
+        // 
+        /// <summary>
+        /// 将以秒表示的时间转换为适当的显示格式
+        /// </summary>
+        /// <param name="offset">以秒表示的时间</param>
+        /// <returns>根据时间跨度决定的适当字符串表示</returns>
         protected string FormatTime(int offset)
         {
             if (offset > 3600)
@@ -92,7 +117,7 @@ namespace FarmTick
             else if (offset > 180)
                 return String.Format("{0}分钟后", offset / 60);
             else if (offset > 60)
-                return String.Format("{0}分钟{1}秒钟后", offset / 60, offset % 60);
+                return String.Format("{0}分{1}秒钟后", offset / 60, offset % 60);
             else if (offset > 0)
                 return String.Format("{0}秒钟后", offset);
             else if (offset > -60)

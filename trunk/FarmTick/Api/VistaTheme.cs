@@ -48,6 +48,10 @@ namespace FarmTick.Api
         [DllImport("user32.dll", EntryPoint = "SendMessageA")]
         private extern static int SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam); 
 
+        /// <summary>
+        /// 开启ListView的Vista风格
+        /// </summary>
+        /// <param name="lvw">欲应用Vista风格的ListView控件</param>
         public static void SetListViewTheme(ListView lvw)
         {
             if (Environment.OSVersion.Version.Major >= 6)

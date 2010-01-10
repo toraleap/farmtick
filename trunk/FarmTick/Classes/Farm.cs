@@ -4,7 +4,9 @@ using System.Text;
 
 namespace FarmTick
 {
-    // QQ农场牧场的基类。表示自己或一个好友的农场或牧场。
+    /// <summary>
+    /// QQ农场牧场的基类。表示自己或一个好友的农场或牧场。
+    /// </summary>
     [Serializable]
     public abstract class Farm
     {
@@ -20,7 +22,9 @@ namespace FarmTick
             CreateGroups();
         }
 
-        // 农场/牧场成熟产品分组
+        /// <summary>
+        /// 为农场牧场创建各自的产品组
+        /// </summary>
         public virtual void CreateGroups()
         {
             // 将产品按成熟时间排序
@@ -46,7 +50,14 @@ namespace FarmTick
             }
         }
 
-        // 创建新分组(需重写)
+        /// <summary>
+        /// 由CreateGroups函数调用，创建一个新分组(需重写)
+        /// </summary>
+        /// <param name="snapshottime">快照时间</param>
+        /// <param name="parent">产品组所属Farm</param>
+        /// <param name="ripetime">产品组内最早成熟时间</param>
+        /// <param name="ripename">产品组内最早成熟产品名</param>
+        /// <returns>新建的产品组</returns>
         protected abstract ProductGroup CreateGroup(DateTime snapshottime, Farm parent, int ripetime, string ripename);
     }
 }

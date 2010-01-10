@@ -36,7 +36,7 @@ namespace FarmTick.Api
         );
 
         /// <summary>
-        /// 使窗口有鼠标穿透功能
+        /// 开启窗口的鼠标穿透功能
         /// </summary>
         public static void Enable(IntPtr handle)
         {
@@ -47,7 +47,7 @@ namespace FarmTick.Api
         }
 
         /// <summary>
-        /// 禁用窗口有鼠标穿透功能
+        /// 禁用窗口的鼠标穿透功能
         /// </summary>
         public static void Disable(IntPtr handle)
         {

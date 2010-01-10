@@ -8,6 +8,9 @@ using HTTPAnalyzerStd;
 
 namespace FarmTick
 {
+    /// <summary>
+    /// HttpAnalyzer驱动数据捕获模式类
+    /// </summary>
     public static class DataHttpAnalyzer
     {
         static Regex regexurl = new Regex(@"(?:http://)?(?:happyfarm|nc|mc)\.(?:xiaoyou|qzone)\.qq\.com/(?:cgi-bin/cgi_|api\.php");
@@ -15,9 +18,15 @@ namespace FarmTick
         static Regex regexfmaster = new Regex(@"(?:http://)?nc\.(?<source>xiaoyou|qzone)\.qq\.com/cgi-bin/cgi_farm_index\?mod=user&act=run(?:&flag=.*?)?$");
         static Regex regexfarmland = new Regex(@"(?:http://)?nc\.(?<source>xiaoyou|qzone)\.qq\.com/cgi-bin/cgi_farm_index\?mod=user&act=run&ownerId=(?<ownerid>\d+)");
         static Regex regexmeadow = new Regex(@"(?:http://)?mc\.(?<source>xiaoyou|qzone)\.qq\.com/cgi-bin/cgi_enter\?");
+        /// <summary>
+        /// 获取是否正在进行数据捕获
+        /// </summary>
         public static bool IsCapturing { get { return ha.IsLogging; } }
         static HTTPAnalyzerStandAloneClass ha;
 
+        /// <summary>
+        /// 启动数据捕获
+        /// </summary>
         public static void Capture()
         {
             try
@@ -35,6 +44,9 @@ namespace FarmTick
             }
         }
 
+        /// <summary>
+        /// 结束数据捕获
+        /// </summary>
         public static void Release()
         {
             try

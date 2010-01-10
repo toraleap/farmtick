@@ -5,7 +5,9 @@ using System.Text.RegularExpressions;
 
 namespace FarmTick
 {
-    // 农场作物类，表示一块耕地的情况
+    /// <summary>
+    /// 农场作物类，继承自Product，表示一块耕地的情况
+    /// </summary>
     [Serializable]
     public class Plant : Product
     {
@@ -18,9 +20,20 @@ namespace FarmTick
         static Regex regexplant = new Regex(@"{""a"":(?<planttype>\d+),""b"":(?<status>\d+),.*?""l"":(?<number1>\d+),""m"":(?<number2>\d+),""n"":[\[\{](?<pickedlist>.*?)[\]\}],.*?""q"":(?<planttime>\d+),.*?}");
         static Regex regexpicked = new Regex(@"""(?<uid>\d+?)"":\d+?");
 
+        /// <summary>
+        /// 作物是否还可以收取
+        /// </summary>
         public override bool Available { get { return (Type > 0 && PickedList.IndexOf(Friends.MasterId) < 0 && (Number1 == 0 || Number1 != Number2)); } }
+        /// <summary>
+        /// 获取作物的成熟时间
+        /// </summary>
         public override int UnifiedRipeTime { get { return PlantTime + RipeOffset; } }
 
+        /// <summary>
+        /// 作物类构造函数
+        /// </summary>
+        /// <param name="response">服务器返回的json字符串</param>
+        /// <param name="servertime">快照时间</param>
         public Plant(string response, int servertime)
         {
             Match m = regexplant.Match(response);

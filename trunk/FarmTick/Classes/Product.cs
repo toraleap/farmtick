@@ -4,21 +4,54 @@ using System.Text;
 
 namespace FarmTick
 {
+    /// <summary>
+    /// 农场或牧场的产品基类
+    /// </summary>
     [Serializable]
     public abstract class Product : IComparable
     {
+        /// <summary>
+        /// 产品类型ID
+        /// </summary>
         public int Type;
-        public virtual bool Available { get { return false; } }
+        /// <summary>
+        /// 产品是否还可以收取
+        /// </summary>
+        public abstract bool Available { get; }
+        /// <summary>
+        /// 获取产品距成熟的剩余时间
+        /// </summary>
+        /// <param name="offset">计算时的时间提前量</param>
+        /// <returns>以秒表示的剩余时间</returns>
         public virtual int GetUnifiedRipeOffset(int offset) { return UnifiedRipeTime - offset; }
+        /// <summary>
+        /// 获取产品的成熟时间
+        /// </summary>
         public abstract int UnifiedRipeTime { get; }
+        /// <summary>
+        /// 获取产品的名称
+        /// </summary>
         public virtual string Name { get { return GetName(Type); } }
+        /// <summary>
+        /// 获取产品的期望价值
+        /// </summary>
         public virtual int Value { get { return ProductTypes.GetPrice(Type); } }
 
+        /// <summary>
+        /// 获取指定ID的产品名称
+        /// </summary>
+        /// <param name="type">产品ID</param>
+        /// <returns>产品名称</returns>
         public static string GetName(int type)
         {
             return ProductTypes.GetName(type);
         }
 
+        /// <summary>
+        /// 实现IComparable接口，比较成熟时间(可重写)
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         public virtual int CompareTo(object product)
         {
             if (product is Product)
@@ -32,7 +65,10 @@ namespace FarmTick
         }
     }
 
-    // 农场作物类型对应的名称、成熟时间表
+    // 
+    /// <summary>
+    /// 产品信息静态类，存储各产品类型对应的ID、名称、成熟时间、出售单价、期望产出数量表
+    /// </summary>
     public static class ProductTypes
     {
         static int[] typeid = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
@@ -89,6 +125,11 @@ namespace FarmTick
                     /*Animals*/   20, 12, 20, 12, 24, 16, 12, 13, 14, 16, 
                         /* 1 */   24, 12, 12, 12, 13, 15 };
 
+        /// <summary>
+        /// 获取指定ID的产品名称
+        /// </summary>
+        /// <param name="id">产品ID</param>
+        /// <returns>产品名称</returns>
         public static string GetName(int id)
         {
             int i;
@@ -96,6 +137,11 @@ namespace FarmTick
             else return "未知产品[" + id.ToString() + "]";
         }
 
+        /// <summary>
+        /// 获取指定ID的产品成熟时间
+        /// </summary>
+        /// <param name="id">产品ID</param>
+        /// <returns>成熟时间，以秒计算</returns>
         public static int GetRipe(int id)
         {
             int i;
@@ -103,6 +149,11 @@ namespace FarmTick
             else return 999999;
         }
 
+        /// <summary>
+        /// 获取指定ID的产品出售单价
+        /// </summary>
+        /// <param name="id">产品ID</param>
+        /// <returns>出售单价</returns>
         public static int GetPrice(int id)
         {
             int i;
@@ -110,6 +161,11 @@ namespace FarmTick
             else return 0;
         }
 
+        /// <summary>
+        /// 获取指定ID的产品期望产出数量
+        /// </summary>
+        /// <param name="id">产品ID</param>
+        /// <returns>期望产出数量</returns>
         public static int GetNumber(int id)
         {
             int i;
