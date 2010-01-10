@@ -8,6 +8,14 @@ namespace FarmTick.Api
 {
     public static class HIDevices
     {
+        /// <summary>
+        /// 模拟鼠标事件
+        /// </summary>
+        /// <param name="dwFlags">事件类型</param>
+        /// <param name="dx">事件x位置</param>
+        /// <param name="dy">事件y位置</param>
+        /// <param name="cButtons">事件按钮</param>
+        /// <param name="dwExtraInfo">附加信息</param>
         [DllImport("user32.dll", EntryPoint = "mouse_event")]
         public static extern void mouse_event(
             int dwFlags,

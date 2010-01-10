@@ -8,6 +8,9 @@ using FarmTick.Properties;
 
 namespace FarmTick
 {
+    /// <summary>
+    /// 解析、维护好友列表数据类
+    /// </summary>
     public static class Friends
     {
         public static Dictionary<int, string> FriendMapXiaoyou = new Dictionary<int, string>();
@@ -16,9 +19,13 @@ namespace FarmTick
         static Regex regexfriend = new Regex(@"""(?:userId|uId)"":(?<userid>\d+),.*?""userName"":""(?<username>.*?)""");
         //static Regex regexmaster = new Regex(@"""uId"":(?<uid>\d+),""userName"":""(?<username>.*?)""");
 
+        /// <summary>
+        /// 解析含有自己昵称信息的封包
+        /// </summary>
+        /// <param name="source">信息来源字符串(xiaoyou或qzone)</param>
+        /// <param name="response">服务器响应的json字符串</param>
         public static void ParseMaster(string source, string response)
         {
-            // 解析含有自己名字的封包
             MatchCollection mc = regexfriend.Matches(response);
             foreach (Match m in mc)
             {
@@ -29,9 +36,13 @@ namespace FarmTick
             FarmTick.NotifyFarmsChanged();
         }
 
+        /// <summary>
+        /// 解析含有好友昵称信息的封包
+        /// </summary>
+        /// <param name="source">信息来源字符串(xiaoyou或qzone)</param>
+        /// <param name="response">服务器响应的json字符串</param>
         public static void ParseFriend(string source, string response)
         {
-            // 解析含有好友名字的封包
             MatchCollection mc = regexfriend.Matches(response);
             foreach (Match m in mc)
             {
@@ -46,9 +57,14 @@ namespace FarmTick
             FarmTick.NotifyFarmsChanged();
         }
 
+        /// <summary>
+        /// 添加或更新一条昵称记录
+        /// </summary>
+        /// <param name="source">昵称类型字符串(xiaoyou或qzone)</param>
+        /// <param name="uid">欲添加或更新的用户ID</param>
+        /// <param name="username">新的昵称字符串</param>
         private static void UpdateFriend(string source, int uid, string username)
         {
-            // 添加或更新本地好友名单
             if (username == String.Empty) username = " ";
 
             if (source.ToLower() == "xiaoyou")
@@ -63,9 +79,11 @@ namespace FarmTick
             }
         }
 
+        /// <summary>
+        /// 载入已存储的好友昵称对照表
+        /// </summary>
         public static void Load()
         {
-            // 载入历史好友名字对照表
             if (File.Exists("./friends.dat"))
             {
                 BinaryFormatter bf = new BinaryFormatter();
@@ -77,9 +95,11 @@ namespace FarmTick
             }
         }
 
+        /// <summary>
+        /// 保存当前好友昵称对照表到磁盘
+        /// </summary>
         public static void Save()
         {
-            // 保存当前好友名字对照表
             BinaryFormatter bf = new BinaryFormatter();
             FileStream fs = new FileStream("./friends.dat", FileMode.Create);
             bf.Serialize(fs, FriendMapXiaoyou);
@@ -88,9 +108,13 @@ namespace FarmTick
             fs.Close();
         }
 
+        /// <summary>
+        /// 获取自己或好友的显示昵称
+        /// </summary>
+        /// <param name="uid">欲获取的用户ID</param>
+        /// <returns>根据系统设置返回对应表达方式的昵称(若无数据返回“未知用户”及其ID号)</returns>
         public static string GetName(int uid)
         {
-            // 根据模式获取uid对应的显示名字
             if (Settings.Default.NameMode == 0)
             {
                 if (FriendMapXiaoyou.ContainsKey(uid) && FriendMapQzone.ContainsKey(uid))
@@ -122,15 +146,23 @@ namespace FarmTick
             }
         }
 
+        /// <summary>
+        /// 将UTF8编码的字符串转换为系统默认编码的字符串
+        /// </summary>
+        /// <param name="str">源字符串</param>
+        /// <returns>转换后的字符串</returns>
         public static string UTF8ToString(string str)
         {
-            // 将UTF8编码的字符串转换为系统默认编码的字符串
             return Encoding.Default.GetString(Encoding.Convert(Encoding.UTF8, Encoding.Default, Encoding.Default.GetBytes(str)));
         }
 
+        /// <summary>
+        /// 将字符串中表示为Unicode转义(类似\uA0E3形式)的字符还原为对应的字符
+        /// </summary>
+        /// <param name="str">源字符串</param>
+        /// <returns>还原后的字符串</returns>
         public static string UniescapeToString(string str)
         {
-            // 将字符串中表示为Unicode转义(类似\uA0E3形式)的字符还原为对应的字符
             int i = 0;
             while ((i = str.IndexOf(@"\u", 0, StringComparison.OrdinalIgnoreCase)) >= 0)
             {
