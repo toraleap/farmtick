@@ -288,6 +288,7 @@ namespace FarmTick
             if (WindowState != FormWindowState.Minimized && lvwFarms.Visible)
             {
                 List<ProductGroup> groups = FarmTick.GetSortedGroups();
+                lvwFarms.BeginUpdate();
                 foreach (ProductGroup g in groups)
                 {
                     if (ge(g))
@@ -320,6 +321,7 @@ namespace FarmTick
                         }
                     }
                 }
+                lvwFarms.EndUpdate();
             }
         }
 
