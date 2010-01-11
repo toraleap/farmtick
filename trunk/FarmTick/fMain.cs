@@ -41,7 +41,7 @@ namespace FarmTick
             // 载入历史好友及农场列表，载入设置
             Friends.Load();
             FarmTick.Load();
-            if (File.Exists("./config.xml")) Deserialize();
+            Deserialize();
             FarmTick.FarmsChanged += OnFarmsChanged;
             tsbView.SelectedIndex = 0;
             OnFarmsChanged();
