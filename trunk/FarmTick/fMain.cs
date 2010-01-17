@@ -136,13 +136,13 @@ namespace FarmTick
             if (tsbView.SelectedIndex > 1)
             {
                 lvwFarms.Visible = false;
-                chtFarms.Visible = true;
-                UpdateChart();
+                //chtFarms.Visible = true;
+                //UpdateChart();
             }
             else
             {
                 lvwFarms.Visible = true;
-                chtFarms.Visible = false;
+                //chtFarms.Visible = false;
                 UpdateListView();
             }
         }
@@ -325,24 +325,24 @@ namespace FarmTick
             }
         }
 
-        // 更新图表显示
-        private void UpdateChart()
-        {
-            if (WindowState != FormWindowState.Minimized && chtFarms.Visible)
-            {
-                switch (tsbView.SelectedIndex)
-                {
-                    case 2:
-                        ChartShowSource();
-                        break;
-                    case 3:
-                        ChartShowTimeBlock();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
+        //// 更新图表显示
+        //private void UpdateChart()
+        //{
+        //    if (WindowState != FormWindowState.Minimized && chtFarms.Visible)
+        //    {
+        //        switch (tsbView.SelectedIndex)
+        //        {
+        //            case 2:
+        //                ChartShowSource();
+        //                break;
+        //            case 3:
+        //                ChartShowTimeBlock();
+        //                break;
+        //            default:
+        //                break;
+        //        }
+        //    }
+        //}
 
         private ListViewGroup GetItemGroup(int offset)
         {
@@ -460,7 +460,7 @@ namespace FarmTick
             dgl.Clear();
             lvwFarms.Items.Clear();
             UpdateListView();
-            UpdateChart();
+            //UpdateChart();
             UpdateAlarm();
         }
 
@@ -516,5 +516,6 @@ namespace FarmTick
             }
         }
         #endregion
+
     }
 }
