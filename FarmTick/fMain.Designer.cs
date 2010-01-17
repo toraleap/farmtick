@@ -35,12 +35,6 @@
             System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("四小时以内", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("四小时以后", System.Windows.Forms.HorizontalAlignment.Left);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fMain));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.ofdXmlFile = new System.Windows.Forms.OpenFileDialog();
             this.lvwFarms = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
@@ -84,13 +78,11 @@
             this.nfyAlarm = new System.Windows.Forms.NotifyIcon(this.components);
             this.tmrAlarm2 = new System.Windows.Forms.Timer(this.components);
             this.lblHint = new System.Windows.Forms.Label();
-            this.chtFarms = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cmsListView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsbListShowOne = new System.Windows.Forms.ToolStripMenuItem();
             this.btnDrag = new System.Windows.Forms.Button();
             this.tmrNotifyIcon = new System.Windows.Forms.Timer(this.components);
             this.tbsMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chtFarms)).BeginInit();
             this.cmsListView.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -194,9 +186,7 @@
             this.tsbView.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.tsbView.Items.AddRange(new object[] {
             "全部列表",
-            "单人列表",
-            "收益来源",
-            "时间收益图"});
+            "单人列表"});
             this.tsbView.Name = "tsbView";
             this.tsbView.Size = new System.Drawing.Size(90, 25);
             this.tsbView.SelectedIndexChanged += new System.EventHandler(this.tsbView_SelectedIndexChanged);
@@ -472,73 +462,6 @@
             this.lblHint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblHint.Visible = false;
             // 
-            // chtFarms
-            // 
-            this.chtFarms.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(223)))), ((int)(((byte)(240)))));
-            this.chtFarms.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
-            this.chtFarms.BorderlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
-            this.chtFarms.BorderlineWidth = 2;
-            chartArea1.Area3DStyle.Enable3D = true;
-            chartArea1.Area3DStyle.PointDepth = 60;
-            chartArea1.AxisX.IsLabelAutoFit = false;
-            chartArea1.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea1.AxisX.Title = "时间";
-            chartArea1.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea1.AxisY.Title = "收益";
-            chartArea1.BackColor = System.Drawing.Color.Transparent;
-            chartArea1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
-            chartArea1.BackSecondaryColor = System.Drawing.Color.Transparent;
-            chartArea1.Name = "ChartSource";
-            this.chtFarms.ChartAreas.Add(chartArea1);
-            this.chtFarms.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Alignment = System.Drawing.StringAlignment.Center;
-            legend1.BackColor = System.Drawing.Color.Transparent;
-            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
-            legend1.Font = new System.Drawing.Font("Trebuchet MS", 8F);
-            legend1.IsTextAutoFit = false;
-            legend1.Name = "Default";
-            legend1.Title = "收益列表";
-            legend1.TitleFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chtFarms.Legends.Add(legend1);
-            this.chtFarms.Location = new System.Drawing.Point(0, 35);
-            this.chtFarms.Name = "chtFarms";
-            series1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
-            series1.ChartArea = "ChartSource";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar;
-            series1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(65)))), ((int)(((byte)(140)))), ((int)(((byte)(240)))));
-            series1.LabelToolTip = "#VAL";
-            series1.Legend = "Default";
-            series1.Name = "Series1";
-            series2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
-            series2.ChartArea = "ChartSource";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar;
-            series2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(252)))), ((int)(((byte)(180)))), ((int)(((byte)(65)))));
-            series2.LabelToolTip = "#VAL";
-            series2.Legend = "Default";
-            series2.Name = "Series2";
-            series3.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
-            series3.ChartArea = "ChartSource";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar;
-            series3.Color = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(224)))), ((int)(((byte)(64)))), ((int)(((byte)(10)))));
-            series3.LabelToolTip = "#VAL";
-            series3.Legend = "Default";
-            series3.Name = "Series3";
-            series4.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
-            series4.ChartArea = "ChartSource";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar;
-            series4.Color = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(5)))), ((int)(((byte)(100)))), ((int)(((byte)(146)))));
-            series4.LabelToolTip = "#VAL";
-            series4.Legend = "Default";
-            series4.Name = "Series4";
-            this.chtFarms.Series.Add(series1);
-            this.chtFarms.Series.Add(series2);
-            this.chtFarms.Series.Add(series3);
-            this.chtFarms.Series.Add(series4);
-            this.chtFarms.Size = new System.Drawing.Size(261, 375);
-            this.chtFarms.TabIndex = 9;
-            // 
             // cmsListView
             // 
             this.cmsListView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -574,7 +497,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(261, 410);
             this.Controls.Add(this.btnDrag);
-            this.Controls.Add(this.chtFarms);
             this.Controls.Add(this.lblHint);
             this.Controls.Add(this.lvwFarms);
             this.Controls.Add(this.tbsMain);
@@ -587,7 +509,6 @@
             this.Resize += new System.EventHandler(this.fMain_Resize);
             this.tbsMain.ResumeLayout(false);
             this.tbsMain.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chtFarms)).EndInit();
             this.cmsListView.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -613,7 +534,6 @@
         private System.Windows.Forms.Label lblHint;
         private System.Windows.Forms.ToolStripMenuItem tsbShowRiped;
         private System.Windows.Forms.ToolStripComboBox tsbView;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chtFarms;
         private System.Windows.Forms.ToolStripButton tsbCapture;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem tsbAutoCapture;
