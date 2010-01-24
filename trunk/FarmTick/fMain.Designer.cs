@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("刚成熟", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("即将收获", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("一小时以内", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("四小时以内", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("四小时以后", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("刚成熟", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("即将收获", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("一小时以内", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup9 = new System.Windows.Forms.ListViewGroup("四小时以内", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup10 = new System.Windows.Forms.ListViewGroup("四小时以后", System.Windows.Forms.HorizontalAlignment.Left);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fMain));
             this.ofdXmlFile = new System.Windows.Forms.OpenFileDialog();
-            this.lvwFarms = new System.Windows.Forms.ListView();
+            this.lvwFarms = new DoubleBufferedListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
@@ -101,22 +101,22 @@
             this.lvwFarms.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvwFarms.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lvwFarms.FullRowSelect = true;
-            listViewGroup1.Header = "刚成熟";
-            listViewGroup1.Name = "listViewGroup1";
-            listViewGroup2.Header = "即将收获";
-            listViewGroup2.Name = "listViewGroup2";
-            listViewGroup3.Header = "一小时以内";
-            listViewGroup3.Name = "listViewGroup3";
-            listViewGroup4.Header = "四小时以内";
-            listViewGroup4.Name = "listViewGroup4";
-            listViewGroup5.Header = "四小时以后";
-            listViewGroup5.Name = "listViewGroup5";
+            listViewGroup6.Header = "刚成熟";
+            listViewGroup6.Name = "listViewGroup1";
+            listViewGroup7.Header = "即将收获";
+            listViewGroup7.Name = "listViewGroup2";
+            listViewGroup8.Header = "一小时以内";
+            listViewGroup8.Name = "listViewGroup3";
+            listViewGroup9.Header = "四小时以内";
+            listViewGroup9.Name = "listViewGroup4";
+            listViewGroup10.Header = "四小时以后";
+            listViewGroup10.Name = "listViewGroup5";
             this.lvwFarms.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2,
-            listViewGroup3,
-            listViewGroup4,
-            listViewGroup5});
+            listViewGroup6,
+            listViewGroup7,
+            listViewGroup8,
+            listViewGroup9,
+            listViewGroup10});
             this.lvwFarms.LargeImageList = this.imgPlants;
             this.lvwFarms.Location = new System.Drawing.Point(0, 35);
             this.lvwFarms.MultiSelect = false;
@@ -304,6 +304,7 @@
             this.tsbNotifyWindowFloat.Name = "tsbNotifyWindowFloat";
             this.tsbNotifyWindowFloat.Size = new System.Drawing.Size(175, 22);
             this.tsbNotifyWindowFloat.Text = "右下浮起窗口(&F)";
+            this.tsbNotifyWindowFloat.Visible = false;
             this.tsbNotifyWindowFloat.Click += new System.EventHandler(this.tsbNotifyWindow_Click);
             // 
             // tsbNotifySound
@@ -458,7 +459,7 @@
             this.lblHint.Name = "lblHint";
             this.lblHint.Size = new System.Drawing.Size(237, 286);
             this.lblHint.TabIndex = 7;
-            this.lblHint.Text = "操作说明\r\n\r\n1. 首次使用请先点击“重载好友列表”\r\n2. 在浏览器中进入所关注好友的农场/牧场\r\n3. enjoy it!";
+            this.lblHint.Text = "操作说明\r\n\r\n1. 进入数据捕获模式\r\n2. 在浏览器中进入所关注好友的农场/牧场\r\n3. enjoy it!";
             this.lblHint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblHint.Visible = false;
             // 
