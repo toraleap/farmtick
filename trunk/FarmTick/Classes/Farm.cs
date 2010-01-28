@@ -30,21 +30,21 @@ namespace FarmTick
             // 将产品按成熟时间排序
             Products.Sort();
 
-            int lasttime = 0;
+            DateTime lasttime = DateTime.Now;
             ProductGroup group = null;
 
             foreach (Product p in Products)
             {
                 if (!p.Available) continue;
-                if (group != null && p.UnifiedRipeTime - lasttime <= 120)
+                if (group != null && p.RipeTime.Subtract(lasttime).TotalSeconds <= 120)
                 {
-                    lasttime = p.UnifiedRipeTime;
+                    lasttime = p.RipeTime;
                     group.Products.Add(p);
                 }
                 else
                 {
-                    lasttime = p.UnifiedRipeTime;
-                    Groups.Add(group = CreateGroup(SnapshotTime, this, p.UnifiedRipeTime, p.Name));
+                    lasttime = p.RipeTime;
+                    Groups.Add(group = CreateGroup(this, p.RipeTime, p.Name));
                     group.Products.Add(p);
                 }
             }
@@ -58,6 +58,6 @@ namespace FarmTick
         /// <param name="ripetime">产品组内最早成熟时间</param>
         /// <param name="ripename">产品组内最早成熟产品名</param>
         /// <returns>新建的产品组</returns>
-        protected abstract ProductGroup CreateGroup(DateTime snapshottime, Farm parent, int ripetime, string ripename);
+        protected abstract ProductGroup CreateGroup(Farm parent, DateTime ripetime, string ripename);
     }
 }

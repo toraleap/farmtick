@@ -32,7 +32,10 @@ namespace FarmTick
             try
             {
                 FiddlerApplication.BeforeResponse += OnBeforeResponse;
-                FiddlerApplication.Startup(8877, true, false);
+                if (Properties.Settings.Default.AutoProxy)
+                    FiddlerApplication.Startup(8877, true, false);
+                else
+                    FiddlerApplication.Startup(8877, false, false);
             }
             catch (Exception e)
             {
@@ -71,13 +74,13 @@ namespace FarmTick
             match = regexfriends1.Match(session.url);
             if (match.Success)
             {
-                Friends.ParseFriend(match.Groups["source"].Value,
+                Friends.ParseFriend(session.url,
                     session.GetResponseBodyAsString());
             }
             match = regexfriends2.Match(session.url);
             if (match.Success)
             {
-                Friends.ParseFriend(match.Groups["source"].Value,
+                Friends.ParseFriend(session.url,
                     session.GetResponseBodyAsString());
             }
 
@@ -85,43 +88,41 @@ namespace FarmTick
             match = regexfmaster.Match(session.url);
             if (match.Success)
             {
-                Friends.ParseMaster(match.Groups["source"].Value,
+                Friends.ParseMaster(session.url,
                     session.GetResponseBodyAsString());
-                Farmland f = new Farmland(match.Groups["source"].Value,
-                    String.Empty,
-                    session.Timers.ServerBeginResponse,
+                Farmland f = new Farmland(session.Timers.ServerBeginResponse,
+                    session.url,
                     session.GetResponseBodyAsString());
                 // 检测是否已有此农场数据
-                if (FarmTick.Farmlands.ContainsKey(f.OwnerId)) FarmTick.Farmlands[f.OwnerId] = f;
-                else FarmTick.Farmlands.Add(f.OwnerId, f);
-                FarmTick.NotifyFarmsChanged();
+                if (FarmTickManager.Farmlands.ContainsKey(f.OwnerId)) FarmTickManager.Farmlands[f.OwnerId] = f;
+                else FarmTickManager.Farmlands.Add(f.OwnerId, f);
+                FarmTickManager.NotifyFarmsChanged();
             }
 
             // 解析好友农场数据
             match = regexfarmland.Match(session.url);
             if (match.Success)
             {
-                Farmland f = new Farmland(match.Groups["source"].Value,
-                    match.Groups["ownerid"].Value,
-                    session.Timers.ServerBeginResponse,
+                Farmland f = new Farmland(session.Timers.ServerBeginResponse,
+                    session.url,
                     session.GetResponseBodyAsString());
                 // 检测是否已有此农场数据
-                if (FarmTick.Farmlands.ContainsKey(f.OwnerId)) FarmTick.Farmlands[f.OwnerId] = f;
-                else FarmTick.Farmlands.Add(f.OwnerId, f);
-                FarmTick.NotifyFarmsChanged();
+                if (FarmTickManager.Farmlands.ContainsKey(f.OwnerId)) FarmTickManager.Farmlands[f.OwnerId] = f;
+                else FarmTickManager.Farmlands.Add(f.OwnerId, f);
+                FarmTickManager.NotifyFarmsChanged();
             }
 
             // 解析好友牧场数据
             match = regexmeadow.Match(session.url);
             if (match.Success)
             {
-                Meadow m = new Meadow(match.Groups["source"].Value,
-                    session.Timers.ServerBeginResponse,
+                Meadow m = new Meadow(session.Timers.ServerBeginResponse,
+                    match.Groups["source"].Value,
                     session.GetResponseBodyAsString());
                 // 检测是否已有此牧场数据
-                if (FarmTick.Meadows.ContainsKey(m.OwnerId)) FarmTick.Meadows[m.OwnerId] = m;
-                else FarmTick.Meadows.Add(m.OwnerId, m);
-                FarmTick.NotifyFarmsChanged();
+                if (FarmTickManager.Meadows.ContainsKey(m.OwnerId)) FarmTickManager.Meadows[m.OwnerId] = m;
+                else FarmTickManager.Meadows.Add(m.OwnerId, m);
+                FarmTickManager.NotifyFarmsChanged();
             }
 
             // 解析牧场生产数据

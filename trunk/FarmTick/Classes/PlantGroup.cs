@@ -10,25 +10,18 @@ namespace FarmTick
     [Serializable]
     public class PlantGroup : ProductGroup
     {
-        public PlantGroup(DateTime snapshottime, Farmland parent, int ripetime, string ripename)
-            : base(snapshottime, parent, ripetime, ripename) { }
+        public PlantGroup(Farmland parent, DateTime ripetime, string ripename)
+            : base(parent, ripetime, ripename) { }
 
         /// <summary>
-        /// 已重载，获取组内产品的概要表示字符串，判断是否有狗
+        /// 已重载，初始化组内产品的概要表示字符串，判断是否有狗
         /// </summary>
-        public override string ProductString
+        protected override string UpdateProductString()
         {
-            get
-            {
-                if (_ProductString == null)
-                {
-                    if ((Parent as Farmland).IsDogHungry)
-                        _ProductString = base.ProductString;
-                    else
-                        _ProductString = "(狗)" + base.ProductString;
-                }
-                return _ProductString;
-            }
+            if ((Parent as Farmland).IsDogHungry)
+                return base.UpdateProductString();
+            else
+                return "(狗)" + base.UpdateProductString();
         }
     }
 }

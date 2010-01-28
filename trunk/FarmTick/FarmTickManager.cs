@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace FarmTick
 {
-    public static class FarmTick
+    public static class FarmTickManager
     {
         /// <summary>
         /// 存储农场快照数据
@@ -44,27 +44,27 @@ namespace FarmTick
         }
         
         /// <summary>
-        /// 根据给出的提前时间量，获取最近成熟的产品组集合
+        /// 根据给出的时间，获取之后成熟的产品组集合
         /// </summary>
         /// <param name="offset">计算时提前的时间量</param>
         /// <returns>满足条件的即将成熟的产品组集合</returns>
-        public static RipeInfoCollection GetFirstRipeCollection(int offset) { return GetFirstRipeCollection(g => { return g.RipeOffset > offset; }); }
+        public static RipeInfoCollection GetFirstRipeCollection(DateTime time) { return GetFirstRipeCollection(g => { return g.RipeTime > time; }); }
         
         /// <summary>
-        /// 根据给出的判定委托，获取最近成熟的产品组集合
+        /// 根据给出的判定委托，获取满足条件成熟的产品组集合
         /// </summary>
         /// <param name="Evaluator">判定产品组是否满足条件的委托调用</param>
         /// <returns>满足条件的即将成熟的产品组集合</returns>
         public static RipeInfoCollection GetFirstRipeCollection(GroupEvaluator Evaluator)
         {
             RipeInfoCollection lri = new RipeInfoCollection();
-            int FirstRipeOffset = 0;
+            DateTime? FirstRipeTime = null;
             foreach (ProductGroup g in GetSortedGroups())
             {
                 if (Evaluator(g))
                 {
-                    if (FirstRipeOffset == 0) FirstRipeOffset = g.RipeOffset;
-                    if (g.RipeOffset - FirstRipeOffset < 60) lri.Add(g);
+                    if (FirstRipeTime == null) FirstRipeTime = g.RipeTime;
+                    if ((g.RipeTime - FirstRipeTime.Value).TotalSeconds < 60) lri.Add(g);
                 }
             }
             return lri;
@@ -145,7 +145,7 @@ namespace FarmTick
                 get
                 {
                     if (this.Count == 0) return DateTime.MinValue;
-                    else return this[0].SnapshotTime.AddSeconds(this[0].RipeTime);
+                    else return this[0].RipeTime;
                 }
             }
 
