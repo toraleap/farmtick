@@ -73,30 +73,6 @@ namespace FarmTick.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Fiddler")]
-        public string CapturerEngine {
-            get {
-                return ((string)(this["CapturerEngine"]));
-            }
-            set {
-                this["CapturerEngine"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int MuteMode {
-            get {
-                return ((int)(this["MuteMode"]));
-            }
-            set {
-                this["MuteMode"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool TopMost {
             get {
@@ -133,13 +109,97 @@ namespace FarmTick.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int NameMode {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowHungry {
             get {
-                return ((int)(this["NameMode"]));
+                return ((bool)(this["ShowHungry"]));
             }
             set {
+                this["ShowHungry"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AutoProxy {
+            get {
+                return ((bool)(this["AutoProxy"]));
+            }
+            set {
+                this["AutoProxy"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool FastClickHotkey {
+            get {
+                return ((bool)(this["FastClickHotkey"]));
+            }
+            set {
+                this["FastClickHotkey"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public fViewUI.MuteModes MuteMode
+        {
+            get
+            {
+                return ((fViewUI.MuteModes)(this["MuteMode"]));
+            }
+            set
+            {
+                this["MuteMode"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public fViewUI.NameModes NameMode
+        {
+            get
+            {
+                return ((fViewUI.NameModes)(this["NameMode"]));
+            }
+            set
+            {
                 this["NameMode"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public fViewUI.ViewStyles ViewStyle
+        {
+            get
+            {
+                return ((fViewUI.ViewStyles)(this["ViewStyle"]));
+            }
+            set
+            {
+                this["ViewStyle"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public fViewUI.TimeModes TimeMode
+        {
+            get
+            {
+                return ((fViewUI.TimeModes)(this["TimeMode"]));
+            }
+            set
+            {
+                this["TimeMode"] = value;
             }
         }
     }

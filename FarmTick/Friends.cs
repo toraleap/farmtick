@@ -16,33 +16,35 @@ namespace FarmTick
         public static Dictionary<int, string> FriendMapXiaoyou = new Dictionary<int, string>();
         public static Dictionary<int, string> FriendMapQzone = new Dictionary<int, string>();
         public static int MasterId;
+        static Regex regexsource = new Regex(@"(?:http://)?(?:happyfarm|nc|mc)\.(?<source>xiaoyou|qzone)\.qq\.com/");
         static Regex regexfriend = new Regex(@"""(?:userId|uId)"":(?<userid>\d+),.*?""userName"":""(?<username>.*?)""");
-        //static Regex regexmaster = new Regex(@"""uId"":(?<uid>\d+),""userName"":""(?<username>.*?)""");
 
         /// <summary>
         /// 解析含有自己昵称信息的封包
         /// </summary>
-        /// <param name="source">信息来源字符串(xiaoyou或qzone)</param>
-        /// <param name="response">服务器响应的json字符串</param>
-        public static void ParseMaster(string source, string response)
+        /// <param name="request">本地请求字符串</param>
+        /// <param name="response">服务器返回的响应json字符串</param>
+        public static void ParseMaster(string request, string response)
         {
+            Match ms = regexsource.Match(request);
             MatchCollection mc = regexfriend.Matches(response);
             foreach (Match m in mc)
             {
                 MasterId = int.Parse(m.Groups["userid"].Value);
                 string username = m.Groups["username"].Value + "[自己]";
-                UpdateFriend(source, MasterId, username);
+                UpdateFriend(ms.Groups["source"].Value, MasterId, username);
             }
-            FarmTick.NotifyFarmsChanged();
+            FarmTickManager.NotifyFarmsChanged();
         }
 
         /// <summary>
         /// 解析含有好友昵称信息的封包
         /// </summary>
-        /// <param name="source">信息来源字符串(xiaoyou或qzone)</param>
-        /// <param name="response">服务器响应的json字符串</param>
-        public static void ParseFriend(string source, string response)
+        /// <param name="request">本地请求字符串</param>
+        /// <param name="response">服务器返回的响应json字符串</param>
+        public static void ParseFriend(string request, string response)
         {
+            Match ms = regexsource.Match(request);
             MatchCollection mc = regexfriend.Matches(response);
             foreach (Match m in mc)
             {
@@ -50,11 +52,11 @@ namespace FarmTick
                 if (uid != MasterId)
                 {
                     string username = UniescapeToString(m.Groups["username"].Value);
-                    UpdateFriend(source, uid, username);
+                    UpdateFriend(ms.Groups["source"].Value, uid, username);
                 }
             }
 
-            FarmTick.NotifyFarmsChanged();
+            FarmTickManager.NotifyFarmsChanged();
         }
 
         /// <summary>
@@ -115,7 +117,7 @@ namespace FarmTick
         /// <returns>根据系统设置返回对应表达方式的昵称(若无数据返回“未知用户”及其ID号)</returns>
         public static string GetName(int uid)
         {
-            if (Settings.Default.NameMode == 0)
+            if (Settings.Default.NameMode == fViewUI.NameModes.Both)
             {
                 if (FriendMapXiaoyou.ContainsKey(uid) && FriendMapQzone.ContainsKey(uid))
                     return FriendMapXiaoyou[uid] + " | " + FriendMapQzone[uid];
@@ -126,7 +128,7 @@ namespace FarmTick
                 else
                     return "未知用户[" + uid.ToString() + "]";
             }
-            else if (Settings.Default.NameMode == 1)
+            else if (Settings.Default.NameMode == fViewUI.NameModes.Xiaoyou)
             {
                 if (FriendMapXiaoyou.ContainsKey(uid))
                     return FriendMapXiaoyou[uid];
