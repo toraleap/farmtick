@@ -105,9 +105,9 @@ namespace FarmTick
         {
             if (group is ProductGroup)
             {
-                if (Properties.Settings.Default.ViewStyle == fViewUI.ViewStyles.Value)
+                if (Properties.Settings.Default.ViewStyle == (int)fViewUI.ViewStyles.Value)
                     return (group as ProductGroup).ExpectValue.CompareTo(ExpectValue);
-                else if (Properties.Settings.Default.ViewStyle == fViewUI.ViewStyles.History)
+                else if (Properties.Settings.Default.ViewStyle == (int)fViewUI.ViewStyles.History)
                     return (group as ProductGroup).RipeTime.CompareTo(RipeTime);
                 else
                     return RipeTime.CompareTo((group as ProductGroup).RipeTime);

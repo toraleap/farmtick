@@ -67,7 +67,7 @@
             this.tsbNotifyWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbNotifySound = new System.Windows.Forms.ToolStripMenuItem();
             this.l = new System.Windows.Forms.ToolStripDropDownButton();
-            this.捕获选项CToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbCaptureOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbAutoCapture = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbAutoProxy = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbAutoClick = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,6 +77,8 @@
             this.tmrAlarm = new System.Windows.Forms.Timer(this.components);
             this.tmrAlarm2 = new System.Windows.Forms.Timer(this.components);
             this.tmrNotifyIcon = new System.Windows.Forms.Timer(this.components);
+            this.tmrDock = new System.Windows.Forms.Timer(this.components);
+            this.tsbEnableDock = new System.Windows.Forms.ToolStripMenuItem();
             this.lvwFarms = new FarmTick.DoubleBufferedListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
@@ -373,23 +375,24 @@
             // l
             // 
             this.l.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.捕获选项CToolStripMenuItem,
-            this.tsbAutoClick});
+            this.tsbCaptureOptions,
+            this.tsbAutoClick,
+            this.tsbEnableDock});
             this.l.Image = ((System.Drawing.Image)(resources.GetObject("l.Image")));
             this.l.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.l.Name = "l";
             this.l.Size = new System.Drawing.Size(61, 21);
             this.l.Text = "设置";
             // 
-            // 捕获选项CToolStripMenuItem
+            // tsbCaptureOptions
             // 
-            this.捕获选项CToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbCaptureOptions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbAutoCapture,
             this.tsbAutoProxy});
-            this.捕获选项CToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("捕获选项CToolStripMenuItem.Image")));
-            this.捕获选项CToolStripMenuItem.Name = "捕获选项CToolStripMenuItem";
-            this.捕获选项CToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.捕获选项CToolStripMenuItem.Text = "捕获选项(&C)";
+            this.tsbCaptureOptions.Image = ((System.Drawing.Image)(resources.GetObject("tsbCaptureOptions.Image")));
+            this.tsbCaptureOptions.Name = "tsbCaptureOptions";
+            this.tsbCaptureOptions.Size = new System.Drawing.Size(165, 22);
+            this.tsbCaptureOptions.Text = "捕获选项(&C)";
             // 
             // tsbAutoCapture
             // 
@@ -411,8 +414,8 @@
             // 
             this.tsbAutoClick.Image = ((System.Drawing.Image)(resources.GetObject("tsbAutoClick.Image")));
             this.tsbAutoClick.Name = "tsbAutoClick";
-            this.tsbAutoClick.Size = new System.Drawing.Size(140, 22);
-            this.tsbAutoClick.Text = "连点热键(&K)";
+            this.tsbAutoClick.Size = new System.Drawing.Size(165, 22);
+            this.tsbAutoClick.Text = "启用连点热键(&K)";
             this.tsbAutoClick.Click += new System.EventHandler(this.tsbAutoClick_Click);
             // 
             // imgProduct
@@ -426,7 +429,8 @@
             this.nfyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("nfyIcon.Icon")));
             this.nfyIcon.Text = "FarmTick v1.0";
             this.nfyIcon.Visible = true;
-            this.nfyIcon.DoubleClick += new System.EventHandler(this.nfyIcon_DoubleClick);
+            this.nfyIcon.MouseUp += new System.Windows.Forms.MouseEventHandler(this.nfyIcon_MouseUp);
+            this.nfyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.nfyIcon_MouseDoubleClick);
             // 
             // tmrUpdate
             // 
@@ -445,6 +449,18 @@
             // tmrNotifyIcon
             // 
             this.tmrNotifyIcon.Tick += new System.EventHandler(this.tmrNotifyIcon_Tick);
+            // 
+            // tmrDock
+            // 
+            this.tmrDock.Enabled = true;
+            this.tmrDock.Tick += new System.EventHandler(this.tmrDock_Tick);
+            // 
+            // tsbEnableDock
+            // 
+            this.tsbEnableDock.Image = ((System.Drawing.Image)(resources.GetObject("tsbEnableDock.Image")));
+            this.tsbEnableDock.Name = "tsbEnableDock";
+            this.tsbEnableDock.Size = new System.Drawing.Size(165, 22);
+            this.tsbEnableDock.Text = "允许边缘停靠(&D)";
             // 
             // lvwFarms
             // 
@@ -509,9 +525,9 @@
             this.Name = "fViewUI";
             this.Text = "FarmTick v1.0";
             this.Load += new System.EventHandler(this.fViewUI_Load);
-            this.MouseEnter += new System.EventHandler(this.fViewUI_MouseEnter);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fViewUI_FormClosed);
             this.Resize += new System.EventHandler(this.fViewUI_Resize);
+            this.LocationChanged += new System.EventHandler(this.fViewUI_LocationChanged);
             this.tbsView.ResumeLayout(false);
             this.tbsView.PerformLayout();
             this.tbsOptions.ResumeLayout(false);
@@ -548,7 +564,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsbNameModeBoth;
         private System.Windows.Forms.ToolStripMenuItem tsbNameModeXiaoyou;
         private System.Windows.Forms.ToolStripMenuItem tsbNameModeQzone;
-        private System.Windows.Forms.ToolStripMenuItem 捕获选项CToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsbCaptureOptions;
         private System.Windows.Forms.ToolStripMenuItem tsbAutoCapture;
         private System.Windows.Forms.ToolStripMenuItem tsbAutoProxy;
         private System.Windows.Forms.Timer tmrUpdate;
@@ -568,5 +584,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsbNotifyValuable300;
         private System.Windows.Forms.ToolStripMenuItem tsbNotifySelfonly;
         private System.Windows.Forms.ToolStripMenuItem tsbNotifyNone;
+        private System.Windows.Forms.Timer tmrDock;
+        private System.Windows.Forms.ToolStripMenuItem tsbEnableDock;
     }
 }

@@ -40,9 +40,9 @@ namespace FarmTick
         {
             if (product is Product)
             {
-                if (Properties.Settings.Default.ViewStyle == fViewUI.ViewStyles.Value)
+                if (Properties.Settings.Default.ViewStyle == (int)fViewUI.ViewStyles.Value)
                     return (product as Product).Value.CompareTo(Value);
-                else if (Properties.Settings.Default.ViewStyle == fViewUI.ViewStyles.History)
+                else if (Properties.Settings.Default.ViewStyle == (int)fViewUI.ViewStyles.History)
                     return (product as Product).RipeTime.CompareTo(RipeTime);
                 else
                     return RipeTime.CompareTo((product as Product).RipeTime);

@@ -73,6 +73,18 @@ namespace FarmTick.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int MuteMode {
+            get {
+                return ((int)(this["MuteMode"]));
+            }
+            set {
+                this["MuteMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool TopMost {
             get {
@@ -109,6 +121,18 @@ namespace FarmTick.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int NameMode {
+            get {
+                return ((int)(this["NameMode"]));
+            }
+            set {
+                this["NameMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ShowHungry {
             get {
@@ -118,7 +142,31 @@ namespace FarmTick.Properties {
                 this["ShowHungry"] = value;
             }
         }
-
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ViewStyle {
+            get {
+                return ((int)(this["ViewStyle"]));
+            }
+            set {
+                this["ViewStyle"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int TimeMode {
+            get {
+                return ((int)(this["TimeMode"]));
+            }
+            set {
+                this["TimeMode"] = value;
+            }
+        }
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -142,64 +190,52 @@ namespace FarmTick.Properties {
                 this["FastClickHotkey"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public fViewUI.MuteModes MuteMode
-        {
-            get
-            {
-                return ((fViewUI.MuteModes)(this["MuteMode"]));
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point Location {
+            get {
+                return ((global::System.Drawing.Point)(this["Location"]));
             }
-            set
-            {
-                this["MuteMode"] = value;
+            set {
+                this["Location"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public fViewUI.NameModes NameMode
-        {
-            get
-            {
-                return ((fViewUI.NameModes)(this["NameMode"]));
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Size Size {
+            get {
+                return ((global::System.Drawing.Size)(this["Size"]));
             }
-            set
-            {
-                this["NameMode"] = value;
+            set {
+                this["Size"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public fViewUI.ViewStyles ViewStyle
-        {
-            get
-            {
-                return ((fViewUI.ViewStyles)(this["ViewStyle"]));
+        public int DockMode {
+            get {
+                return ((int)(this["DockMode"]));
             }
-            set
-            {
-                this["ViewStyle"] = value;
+            set {
+                this["DockMode"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public fViewUI.TimeModes TimeMode
-        {
-            get
-            {
-                return ((fViewUI.TimeModes)(this["TimeMode"]));
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DockEnabled {
+            get {
+                return ((bool)(this["DockEnabled"]));
             }
-            set
-            {
-                this["TimeMode"] = value;
+            set {
+                this["DockEnabled"] = value;
             }
         }
     }
