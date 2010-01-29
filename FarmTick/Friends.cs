@@ -117,7 +117,7 @@ namespace FarmTick
         /// <returns>根据系统设置返回对应表达方式的昵称(若无数据返回“未知用户”及其ID号)</returns>
         public static string GetName(int uid)
         {
-            if (Settings.Default.NameMode == fViewUI.NameModes.Both)
+            if (Settings.Default.NameMode == (int)fViewUI.NameModes.Both)
             {
                 if (FriendMapXiaoyou.ContainsKey(uid) && FriendMapQzone.ContainsKey(uid))
                     return FriendMapXiaoyou[uid] + " | " + FriendMapQzone[uid];
@@ -128,7 +128,7 @@ namespace FarmTick
                 else
                     return "未知用户[" + uid.ToString() + "]";
             }
-            else if (Settings.Default.NameMode == fViewUI.NameModes.Xiaoyou)
+            else if (Settings.Default.NameMode == (int)fViewUI.NameModes.Xiaoyou)
             {
                 if (FriendMapXiaoyou.ContainsKey(uid))
                     return FriendMapXiaoyou[uid];

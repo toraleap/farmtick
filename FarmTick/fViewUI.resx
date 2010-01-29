@@ -416,7 +416,7 @@
         AAfEap1ZAuTNAxKwrhUIkgDaCBckzBUYICMBEHcfPEhJkMBGAB8OoGQ7MCAAOw==
 </value>
   </data>
-  <data name="捕获选项CToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tsbCaptureOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         R0lGODlhEAAQAIQdACk0QKGqtP///3F6hWBsdq64w8vS1+Lm6eDe98zP23d+hdzf79HU3aOrs9DT3H+G
         jeHg+Gdvd4OJkc3P287R3WdweH2Ei8nQ1ezv+6GqsoSMlOvw++Df9////wAAAAAAACH/C05FVFNDQVBF
@@ -432,6 +432,21 @@
         Mi4wAwEBAAAh+QQBAAAZACwAAAAAEAAQAAAIbAAzCBxIMAOAgggNZhAAQIDChAIFBJjoEOLCAAAyBqiI
         UKMCBREwHkw4IIADBxcCDLCYoeTElQkPKBwAYOVIggcQYBh4s2DOAgYSsLSAACgBlg8aGEXaAAKDCiwX
         UHAqNKqECVVZZiBwVGuGgAA7
+</value>
+  </data>
+  <data name="tsbEnableDock.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        R0lGODlhEAAQAIZFAP///wBcyM7x/x6q/2a7/9Xz/5vR/zWq/wAbif3+/vr7/CczPu/z9/P2+env9ABe
+        yPb4+gBfyQBkywBgyABUxQBdyABUxAApkQAokHF9iABWxdj1/wBKsXHR/wBWxp3f/2Jqdf///gBZyuju
+        8y2m/3qIkwAciigzPy40ODey/213gmdxfQBDsABiy8vv/5vY/wAbiABWxGC4/4yVmmbD/////fv59//+
+        +sjv/wBItgBexgBgyXaBju7y9q7h/0pTXvX4+mJtdpjM//L1+SSv/////wAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEBAAAh+QQB
+        AABFACwAAAAAEAAQAAAIpQCLCBxIsKDBgwQlRKgQoKHDhxUiKPzgAoeAixgz+tjxoAAJGUIGiBw5koiE
+        CQUOEDCgAwaClzARmGDRUaUBDwBy6tQ5o+ZKCwASCB2aAEAJlDZjAFDAtKkCADx8GrAQAoLVq0AAZJBK
+        oUaDr2CHAFCBdKWGGwzSqu0BYMWDDTYp2HBAt+4IAEFadEhB44WInYBBcMBw4QKGHCgWKF684MQPhAgD
+        AgA7
 </value>
   </data>
   <data name="l.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -650,6 +665,9 @@
   </metadata>
   <metadata name="tmrNotifyIcon.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>816, 17</value>
+  </metadata>
+  <metadata name="tmrDock.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 56</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

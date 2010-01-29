@@ -56,6 +56,19 @@ namespace FarmTick
             None
         }
 
+        /// <summary>
+        /// 边缘停靠模式枚举
+        /// </summary>
+        public enum DockModes
+        {
+            None,
+            Left,
+            Top,
+            Right
+        }
+
+        bool LocationChangedByUser = false;
+
         public fViewUI()
         {
             InitializeComponent();
@@ -67,9 +80,19 @@ namespace FarmTick
 
             // 尝试启用Vista风格
             if (Environment.OSVersion.Version.Major >= 6) Api.VistaTheme.SetListViewTheme(lvwFarms);
-            // 窗口定位于右下角
-            Left = Screen.PrimaryScreen.WorkingArea.Right - Width - 16;
-            Top = Screen.PrimaryScreen.WorkingArea.Bottom - Height - 16;
+            // 恢复窗口大小和位置
+            if (Settings.Default.Size.Width == 0)
+            {
+                Left = Screen.PrimaryScreen.WorkingArea.Right - Width - 16;
+                Top = Screen.PrimaryScreen.WorkingArea.Bottom - Height - 16;
+            }
+            else
+            {
+                Location = Settings.Default.Location;
+                Size = Settings.Default.Size;
+            }
+            if (Settings.Default.DockMode != (int)DockModes.None) TopMost = true;
+            LocationChangedByUser = true;
 
             ApplySettings();
             if (Settings.Default.AutoCapture)
@@ -86,6 +109,8 @@ namespace FarmTick
         private void fViewUI_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (DataFiddler.IsCapturing) DataFiddler.Release();
+            Settings.Default.Location = Location;
+            Settings.Default.Size = Size;
             Program.Exit();
         }
 
@@ -172,7 +197,7 @@ namespace FarmTick
         private ListViewGroup GetItemGroup(ProductGroup g)
         {
             string grouptext = null;
-            switch (Settings.Default.ViewStyle)
+            switch ((ViewStyles)Settings.Default.ViewStyle)
             {
                 case ViewStyles.Time:
                     if ((g.RipeTime - DateTime.Now).TotalMinutes < 10)
@@ -266,6 +291,35 @@ namespace FarmTick
             }
         }
 
+        private void fViewUI_LocationChanged(object sender, EventArgs e)
+        {
+            if (!LocationChangedByUser || !Settings.Default.DockEnabled || WindowState == FormWindowState.Minimized) return;
+
+            if (Left <= 0)
+            {
+                Left = 0;
+                Settings.Default.DockMode = (int)DockModes.Left;
+                TopMost = true;
+            }
+            else if (Right >= Screen.PrimaryScreen.WorkingArea.Right)
+            {
+                Left = Screen.PrimaryScreen.WorkingArea.Right - Width;
+                Settings.Default.DockMode = (int)DockModes.Right;
+                TopMost = true;
+            }
+            else if (Top <= 0)
+            {
+                Top = 0;
+                Settings.Default.DockMode = (int)DockModes.Top;
+                TopMost = true;
+            }
+            else
+            {
+                Settings.Default.DockMode = (int)DockModes.None;
+                TopMost = Settings.Default.TopMost;
+            }
+        }
+
         private void lvwFarms_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -276,8 +330,11 @@ namespace FarmTick
         }
 
         private static FormWindowState originwindowstate = FormWindowState.Normal;
-        private void nfyIcon_DoubleClick(object sender, EventArgs e)
+
+        private void nfyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            if (e.Button != MouseButtons.Left) return;
+
             if (WindowState == FormWindowState.Minimized)
             {
                 Visible = true;
@@ -306,7 +363,7 @@ namespace FarmTick
                 if (tsbUIGroup[i] == sender)
                 {
                     tsbUIGroup[i].Checked = true;
-                    Settings.Default.ViewStyle = (ViewStyles)i;
+                    Settings.Default.ViewStyle = i;
                 }
                 else
                     tsbUIGroup[i].Checked = false;
@@ -322,7 +379,7 @@ namespace FarmTick
                 if (tsbTimeGroup[i] == sender)
                 {
                     tsbTimeGroup[i].Checked = true;
-                    Settings.Default.TimeMode = (TimeModes)i;
+                    Settings.Default.TimeMode = i;
                 }
                 else
                     tsbTimeGroup[i].Checked = false;
@@ -338,7 +395,7 @@ namespace FarmTick
                 if (tsbNameGroup[i] == sender)
                 {
                     tsbNameGroup[i].Checked = true;
-                    Settings.Default.NameMode = (NameModes)i;
+                    Settings.Default.NameMode = i;
                 }
                 else
                     tsbNameGroup[i].Checked = false;
@@ -354,7 +411,7 @@ namespace FarmTick
                 if (tsbNotifyGroup[i] == sender as ToolStripMenuItem)
                 {
                     tsbNotifyGroup[i].Checked = true;
-                    Settings.Default.MuteMode = (MuteModes)i;
+                    Settings.Default.MuteMode = i;
                 }
                 else
                     tsbNotifyGroup[i].Checked = false;
@@ -455,6 +512,30 @@ namespace FarmTick
             UpdateView();
         }
 
+        private void tmrDock_Tick(object sender, EventArgs e)
+        {
+            switch ((DockModes)Settings.Default.DockMode)
+            {
+                case DockModes.None:
+                    return;
+                case DockModes.Left:
+                    LocationChangedByUser = false;
+                    if (Left < 0 && new Rectangle(Location, Size).Contains(Control.MousePosition)) Left = 0;
+                    else if (Left == 0 && !new Rectangle(Location, Size).Contains(Control.MousePosition)) Left = 2 - Width;
+                    break;
+                case DockModes.Right:
+                    LocationChangedByUser = false;
+                    if (Right > Screen.PrimaryScreen.WorkingArea.Right && new Rectangle(Location, Size).Contains(Control.MousePosition)) Left = Screen.PrimaryScreen.WorkingArea.Right - Width;
+                    else if (Right == Screen.PrimaryScreen.WorkingArea.Right && !new Rectangle(Location, Size).Contains(Control.MousePosition)) Left = Screen.PrimaryScreen.WorkingArea.Right - 2;
+                    break;
+                case DockModes.Top:
+                    LocationChangedByUser = false;
+                    if (Top < 0 && new Rectangle(Location, Size).Contains(Control.MousePosition)) Top = 0;
+                    else if (Top == 0 && !new Rectangle(Location, Size).Contains(Control.MousePosition)) Top = 2 - Height;
+                    break;
+            }
+            LocationChangedByUser = true;
+        }
         /// <summary>
         /// 载入农牧场产品的图像文件
         /// </summary>
@@ -498,9 +579,11 @@ namespace FarmTick
             tsbAlarm.Checked = Settings.Default.Timer60Sec;
             tsbAlarm2.Checked = Settings.Default.Timer10Sec;
 
+            tsbTopMost.Checked = Settings.Default.TopMost;
             tsbAutoCapture.Checked = Settings.Default.AutoCapture;
             tsbAutoProxy.Checked = Settings.Default.AutoProxy;
             tsbAutoClick.Checked = Settings.Default.FastClickHotkey;
+            tsbEnableDock.Checked = Settings.Default.DockEnabled;
         }
 
         /// <summary>
@@ -525,7 +608,7 @@ namespace FarmTick
         protected bool ViewFilter(ProductGroup g)
         {
             DateTime now = DateTime.Now;
-            switch (Settings.Default.ViewStyle)
+            switch ((ViewStyles)Settings.Default.ViewStyle)
             {
                 case ViewStyles.Time:
                     if (g.RipeTime > now) return true;
@@ -551,7 +634,7 @@ namespace FarmTick
         protected bool AlarmFilter(ProductGroup g)
         {
             DateTime now = DateTime.Now;
-            switch (Settings.Default.MuteMode)
+            switch ((MuteModes)Settings.Default.MuteMode)
             {
                 case MuteModes.All:
                     if (g.RipeTime > now) return true;
@@ -615,7 +698,7 @@ namespace FarmTick
         protected string FormatTime(DateTime dt)
         {
             TimeSpan ts = dt - DateTime.Now;
-            switch (Settings.Default.TimeMode)
+            switch ((TimeModes)Settings.Default.TimeMode)
             {
                 case TimeModes.Auto:
                     if (ts.TotalHours > 1)
@@ -653,10 +736,10 @@ namespace FarmTick
             return "时间格式化错误";
         }
 
-        private void fViewUI_MouseEnter(object sender, EventArgs e)
+        private void nfyIcon_MouseUp(object sender, MouseEventArgs e)
         {
-            MessageBox.Show("cc");
-            Text = e.ToString();
+            tsbMuteMode.ShowDropDown();
         }
+
     }
 }
