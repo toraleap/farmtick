@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fViewUI));
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("刚成熟", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("即将收获", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("一小时以内", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("四小时以内", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("四小时以后", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("刚成熟", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("即将收获", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("一小时以内", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup9 = new System.Windows.Forms.ListViewGroup("四小时以内", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup10 = new System.Windows.Forms.ListViewGroup("四小时以后", System.Windows.Forms.HorizontalAlignment.Left);
             this.tbsView = new System.Windows.Forms.ToolStrip();
             this.tsbUITime = new System.Windows.Forms.ToolStripButton();
             this.tsbUIUser = new System.Windows.Forms.ToolStripButton();
@@ -71,6 +71,7 @@
             this.tsbAutoCapture = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbAutoProxy = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbAutoClick = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbEnableDock = new System.Windows.Forms.ToolStripMenuItem();
             this.imgProduct = new System.Windows.Forms.ImageList(this.components);
             this.nfyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.tmrUpdate = new System.Windows.Forms.Timer(this.components);
@@ -78,7 +79,6 @@
             this.tmrAlarm2 = new System.Windows.Forms.Timer(this.components);
             this.tmrNotifyIcon = new System.Windows.Forms.Timer(this.components);
             this.tmrDock = new System.Windows.Forms.Timer(this.components);
-            this.tsbEnableDock = new System.Windows.Forms.ToolStripMenuItem();
             this.lvwFarms = new FarmTick.DoubleBufferedListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
@@ -161,7 +161,7 @@
             this.tsbDisplay,
             this.tsbNotify,
             this.l});
-            this.tbsOptions.Location = new System.Drawing.Point(0, 386);
+            this.tbsOptions.Location = new System.Drawing.Point(0, 389);
             this.tbsOptions.Name = "tbsOptions";
             this.tbsOptions.Size = new System.Drawing.Size(236, 24);
             this.tbsOptions.TabIndex = 8;
@@ -418,6 +418,13 @@
             this.tsbAutoClick.Text = "启用连点热键(&K)";
             this.tsbAutoClick.Click += new System.EventHandler(this.tsbAutoClick_Click);
             // 
+            // tsbEnableDock
+            // 
+            this.tsbEnableDock.Image = ((System.Drawing.Image)(resources.GetObject("tsbEnableDock.Image")));
+            this.tsbEnableDock.Name = "tsbEnableDock";
+            this.tsbEnableDock.Size = new System.Drawing.Size(165, 22);
+            this.tsbEnableDock.Text = "允许边缘停靠(&D)";
+            // 
             // imgProduct
             // 
             this.imgProduct.ColorDepth = System.Windows.Forms.ColorDepth.Depth24Bit;
@@ -429,7 +436,6 @@
             this.nfyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("nfyIcon.Icon")));
             this.nfyIcon.Text = "FarmTick v1.0";
             this.nfyIcon.Visible = true;
-            this.nfyIcon.MouseUp += new System.Windows.Forms.MouseEventHandler(this.nfyIcon_MouseUp);
             this.nfyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.nfyIcon_MouseDoubleClick);
             // 
             // tmrUpdate
@@ -455,13 +461,6 @@
             this.tmrDock.Enabled = true;
             this.tmrDock.Tick += new System.EventHandler(this.tmrDock_Tick);
             // 
-            // tsbEnableDock
-            // 
-            this.tsbEnableDock.Image = ((System.Drawing.Image)(resources.GetObject("tsbEnableDock.Image")));
-            this.tsbEnableDock.Name = "tsbEnableDock";
-            this.tsbEnableDock.Size = new System.Drawing.Size(165, 22);
-            this.tsbEnableDock.Text = "允许边缘停靠(&D)";
-            // 
             // lvwFarms
             // 
             this.lvwFarms.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -472,27 +471,27 @@
             this.lvwFarms.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvwFarms.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lvwFarms.FullRowSelect = true;
-            listViewGroup1.Header = "刚成熟";
-            listViewGroup1.Name = "listViewGroup1";
-            listViewGroup2.Header = "即将收获";
-            listViewGroup2.Name = "listViewGroup2";
-            listViewGroup3.Header = "一小时以内";
-            listViewGroup3.Name = "listViewGroup3";
-            listViewGroup4.Header = "四小时以内";
-            listViewGroup4.Name = "listViewGroup4";
-            listViewGroup5.Header = "四小时以后";
-            listViewGroup5.Name = "listViewGroup5";
+            listViewGroup6.Header = "刚成熟";
+            listViewGroup6.Name = "listViewGroup1";
+            listViewGroup7.Header = "即将收获";
+            listViewGroup7.Name = "listViewGroup2";
+            listViewGroup8.Header = "一小时以内";
+            listViewGroup8.Name = "listViewGroup3";
+            listViewGroup9.Header = "四小时以内";
+            listViewGroup9.Name = "listViewGroup4";
+            listViewGroup10.Header = "四小时以后";
+            listViewGroup10.Name = "listViewGroup5";
             this.lvwFarms.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2,
-            listViewGroup3,
-            listViewGroup4,
-            listViewGroup5});
+            listViewGroup6,
+            listViewGroup7,
+            listViewGroup8,
+            listViewGroup9,
+            listViewGroup10});
             this.lvwFarms.LargeImageList = this.imgProduct;
             this.lvwFarms.Location = new System.Drawing.Point(0, 24);
             this.lvwFarms.MultiSelect = false;
             this.lvwFarms.Name = "lvwFarms";
-            this.lvwFarms.Size = new System.Drawing.Size(236, 362);
+            this.lvwFarms.Size = new System.Drawing.Size(236, 365);
             this.lvwFarms.SmallImageList = this.imgProduct;
             this.lvwFarms.TabIndex = 5;
             this.lvwFarms.TileSize = new System.Drawing.Size(218, 64);
@@ -516,11 +515,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(236, 410);
+            this.ClientSize = new System.Drawing.Size(236, 413);
             this.Controls.Add(this.lvwFarms);
             this.Controls.Add(this.tbsOptions);
             this.Controls.Add(this.tbsView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(252, 172);
             this.Name = "fViewUI";
             this.Text = "FarmTick v1.0";
