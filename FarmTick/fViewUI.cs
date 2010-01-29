@@ -253,11 +253,11 @@ namespace FarmTick
 
         #region 界面操作事件
         private static bool iconnotified = false;
-        private void fMain_Resize(object sender, EventArgs e)
+        private void fViewUI_Resize(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Minimized)
             {
-                ShowInTaskbar = false;
+                Visible = false;
                 if (!iconnotified)
                 {
                     iconnotified = true;
@@ -266,19 +266,28 @@ namespace FarmTick
             }
         }
 
+        private void lvwFarms_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                tbsView.Visible = !tbsView.Visible;
+                tbsOptions.Visible = !tbsOptions.Visible;
+            }
+        }
+
         private static FormWindowState originwindowstate = FormWindowState.Normal;
         private void nfyIcon_DoubleClick(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Minimized)
             {
+                Visible = true;
                 WindowState = originwindowstate;
-                ShowInTaskbar = true;
             }
             else
             {
                 originwindowstate = WindowState;
                 WindowState = FormWindowState.Minimized;
-                ShowInTaskbar = false;
+                Visible = false;
             }
         }
 
@@ -642,6 +651,12 @@ namespace FarmTick
                         return String.Format("{0}小时{1}分钟前 {2}", (int)(-ts).TotalHours, (-ts).Minutes, dt.ToLongTimeString());
             }
             return "时间格式化错误";
+        }
+
+        private void fViewUI_MouseEnter(object sender, EventArgs e)
+        {
+            MessageBox.Show("cc");
+            Text = e.ToString();
         }
     }
 }
