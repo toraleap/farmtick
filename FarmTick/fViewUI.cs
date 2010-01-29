@@ -293,7 +293,7 @@ namespace FarmTick
 
         private void fViewUI_LocationChanged(object sender, EventArgs e)
         {
-            if (!LocationChangedByUser || !Settings.Default.DockEnabled || WindowState == FormWindowState.Minimized) return;
+            if (!LocationChangedByUser || !Settings.Default.DockEnabled || WindowState != FormWindowState.Normal) return;
 
             if (Left <= 0)
             {
@@ -735,11 +735,5 @@ namespace FarmTick
             }
             return "时间格式化错误";
         }
-
-        private void nfyIcon_MouseUp(object sender, MouseEventArgs e)
-        {
-            tsbMuteMode.ShowDropDown();
-        }
-
     }
 }
