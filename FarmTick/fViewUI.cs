@@ -67,6 +67,16 @@ namespace FarmTick
             Right
         }
 
+        /// <summary>
+        /// 提醒窗口模式枚举
+        /// </summary>
+        public enum NotifyWindowModes
+        {
+            None,
+            Icon,
+            Transparent
+        }
+
         bool LocationChangedByUser = false;
 
         public fViewUI()
@@ -460,14 +470,30 @@ namespace FarmTick
 
         private void tsbNotifyWindow_Click(object sender, EventArgs e)
         {
-            Settings.Default.NotifyWindow = 1 - Settings.Default.NotifyWindow;
-            tsbNotifyWindow.Checked = Settings.Default.NotifyWindow > 0;
+            ToolStripMenuItem[] tsbNotifyWindowGroup = new ToolStripMenuItem[] { tsbNotifyWindowNone, tsbNotifyWindowIcon, tsbNotifyWindowTransparent };
+            for (int i = 0; i < tsbNotifyWindowGroup.Length; i++)
+            {
+                if (tsbNotifyWindowGroup[i] == sender as ToolStripMenuItem)
+                {
+                    tsbNotifyWindowGroup[i].Checked = true;
+                    Settings.Default.NotifyWindow = i;
+                }
+                else
+                    tsbNotifyWindowGroup[i].Checked = false;
+            }
+            UpdateAlarm();
         }
 
         private void tsbNotifySound_Click(object sender, EventArgs e)
         {
             Settings.Default.NotifySound = !Settings.Default.NotifySound;
             tsbNotifySound.Checked = Settings.Default.NotifySound;
+        }
+
+        private void tsbEnableDock_Click(object sender, EventArgs e)
+        {
+            Settings.Default.DockEnabled = !Settings.Default.DockEnabled;
+            tsbEnableDock.Checked = Settings.Default.DockEnabled;
         }
 
         private void tsbAlarm_Click(object sender, EventArgs e)
@@ -487,17 +513,17 @@ namespace FarmTick
 
         private void tmrAlarm_Tick(object sender, EventArgs e)
         {
-            FarmTickManager.RipeInfoCollection ris = tmrAlarm.Tag as FarmTickManager.RipeInfoCollection;
+            FarmTickManager.RipeInfoCollection ric = tmrAlarm.Tag as FarmTickManager.RipeInfoCollection;
             tmrAlarm.Enabled = false;
-            ShowNotify(string.Format("{0}", ris.OwnerName), string.Format("{0}已进入60秒倒计时\n预期价值:{1}", ris.ProductString, ris.ExpectValue), imgProduct.Images[ris[0].RipeName]);
+            ShowNotify(ric, imgProduct.Images[ric[0].RipeName], 60);
             UpdateAlarm();
         }
 
         private void tmrAlarm2_Tick(object sender, EventArgs e)
         {
-            FarmTickManager.RipeInfoCollection ris = tmrAlarm2.Tag as FarmTickManager.RipeInfoCollection;
+            FarmTickManager.RipeInfoCollection ric = tmrAlarm2.Tag as FarmTickManager.RipeInfoCollection;
             tmrAlarm2.Enabled = false;
-            ShowNotify(string.Format("{0}", ris.OwnerName), string.Format("{0}已进入10秒倒计时\n预期价值:{1}", ris.ProductString, ris.ExpectValue), imgProduct.Images[ris[0].RipeName]);
+            ShowNotify(ric, imgProduct.Images[ric[0].RipeName], 10);
             UpdateAlarm();
         }
 
@@ -571,6 +597,9 @@ namespace FarmTick
             
             ToolStripMenuItem[] tsbNotifyGroup = new ToolStripMenuItem[] { tsbNotifyAll, tsbNotifyValuable100, tsbNotifyValuable300, tsbNotifySelfonly, tsbNotifyNone };
             tsbNotifyGroup[(int)Settings.Default.MuteMode].Checked = true;
+
+            ToolStripMenuItem[] tsbNotifyWindowGroup = new ToolStripMenuItem[] { tsbNotifyWindowNone, tsbNotifyWindowIcon, tsbNotifyWindowTransparent };
+            tsbNotifyWindowGroup[(int)Settings.Default.NotifyWindow].Checked = true;
 
             tsbShowHungry.Checked = Settings.Default.ShowHungry;
 
@@ -654,11 +683,20 @@ namespace FarmTick
             return false;
         }
 
-        protected void ShowNotify(string title, string text, Image image)
+        protected void ShowNotify(FarmTickManager.RipeInfoCollection ric, Image image, int offset)
         {
             if (Settings.Default.NotifySound) new System.Media.SoundPlayer(@"res\alarm.wav").Play();
-            if (Settings.Default.NotifyWindow > 0)
-                nfyIcon.ShowBalloonTip(10000, title, text, ToolTipIcon.Info);
+            switch ((NotifyWindowModes)Settings.Default.NotifyWindow)
+            {
+                case NotifyWindowModes.None:
+                    break;
+                case NotifyWindowModes.Icon:
+                    nfyIcon.ShowBalloonTip(10000, ric.OwnerName, String.Format("{0} 预计{1}金币\n{2}秒后成熟，请注意收取。", ric.ProductString, ric.ExpectValue, offset), ToolTipIcon.Info);
+                    break;
+                case NotifyWindowModes.Transparent:
+                    LayeredAlphaForm.ShowNotify(ric, image, offset);
+                    break;
+            }
         }
 
         bool AutoClickProcessing = false;
@@ -735,5 +773,7 @@ namespace FarmTick
             }
             return "时间格式化错误";
         }
+
+
     }
 }
