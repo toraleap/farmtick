@@ -31,8 +31,6 @@ namespace FarmTick
             foreach (Match m in mc)
             {
                 MasterId = int.Parse(m.Groups["userid"].Value);
-                string username = m.Groups["username"].Value + "[自己]";
-                UpdateFriend(ms.Groups["source"].Value, MasterId, username);
             }
             FarmTickManager.NotifyFarmsChanged();
         }
@@ -120,31 +118,31 @@ namespace FarmTick
             if (Settings.Default.NameMode == (int)fViewUI.NameModes.Both)
             {
                 if (FriendMapXiaoyou.ContainsKey(uid) && FriendMapQzone.ContainsKey(uid))
-                    return FriendMapXiaoyou[uid] + " | " + FriendMapQzone[uid];
+                    return (uid == MasterId ? "★" : "") + FriendMapXiaoyou[uid] + " | " + FriendMapQzone[uid];
                 else if (FriendMapXiaoyou.ContainsKey(uid))
-                    return FriendMapXiaoyou[uid];
+                    return (uid == MasterId ? "★" : "") + FriendMapXiaoyou[uid];
                 else if (FriendMapQzone.ContainsKey(uid))
-                    return FriendMapQzone[uid];
+                    return (uid == MasterId ? "★" : "") + FriendMapQzone[uid];
                 else
-                    return "未知用户[" + uid.ToString() + "]";
+                    return (uid == MasterId ? "★" : "") + "未知用户[" + uid.ToString() + "]";
             }
             else if (Settings.Default.NameMode == (int)fViewUI.NameModes.Xiaoyou)
             {
                 if (FriendMapXiaoyou.ContainsKey(uid))
-                    return FriendMapXiaoyou[uid];
+                    return (uid == MasterId ? "★" : "") + FriendMapXiaoyou[uid];
                 else if (FriendMapQzone.ContainsKey(uid))
-                    return FriendMapQzone[uid];
+                    return (uid == MasterId ? "★" : "") + FriendMapQzone[uid];
                 else
-                    return "未知用户[" + uid.ToString() + "]";
+                    return (uid == MasterId ? "★" : "") + "未知用户[" + uid.ToString() + "]";
             }
             else
             {
                 if (FriendMapQzone.ContainsKey(uid))
-                    return FriendMapQzone[uid];
+                    return (uid == MasterId ? "★" : "") + FriendMapQzone[uid];
                 else if (FriendMapXiaoyou.ContainsKey(uid))
-                    return FriendMapXiaoyou[uid];
+                    return (uid == MasterId ? "★" : "") + FriendMapXiaoyou[uid];
                 else
-                    return "未知用户[" + uid.ToString() + "]";
+                    return (uid == MasterId ? "★" : "") + "未知用户[" + uid.ToString() + "]";
             }
         }
 

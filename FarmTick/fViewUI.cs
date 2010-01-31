@@ -332,10 +332,14 @@ namespace FarmTick
 
         private void lvwFarms_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Left)
             {
-                tbsView.Visible = !tbsView.Visible;
-                tbsOptions.Visible = !tbsOptions.Visible;
+                ListViewHitTestInfo lvhti = lvwFarms.HitTest(e.Location);
+                if (lvhti.Item != null)
+                {
+                    lvhti.Item.Selected = true;
+                    tsbViewStatistics_Click(null, null);
+                }
             }
         }
 
@@ -508,6 +512,43 @@ namespace FarmTick
             Settings.Default.Timer10Sec = !Settings.Default.Timer10Sec;
             tsbAlarm2.Checked = Settings.Default.Timer10Sec;
             UpdateAlarm();
+        }
+
+        private void tsbViewUserProduct_Click(object sender, EventArgs e)
+        {
+            ProductGroup g = lvwFarms.SelectedItems[0].Tag as ProductGroup;
+            if (Settings.Default.ViewStyle != (int)ViewStyles.User) tsbViewStyle_Click(tsbUIUser, null);
+            dgl[g].Selected = true;
+            lvwFarms.EnsureVisible(lvwFarms.Items.IndexOf(dgl[g]));
+        }
+
+        private void tsbViewStatistics_Click(object sender, EventArgs e)
+        {
+            ProductGroup g = lvwFarms.SelectedItems[0].Tag as ProductGroup;
+            string source = (Friends.FriendMapXiaoyou.ContainsKey(g.OwnerId) ? "校友 " : "") + (Friends.FriendMapQzone.ContainsKey(g.OwnerId) ? "空间 " : "");
+            MessageBox.Show(String.Format("{0}[ID:{1}] 的产品详细信息\n\n好友类型: {2}\n本组产品: {3}\n预期价值: {4} 金币\n首先成熟: {5}\n收获耗时: {6}\n\n注: 以上信息为 {7} 获得的数据。", g.OwnerName, g.OwnerId, source, g.ProductString, g.ExpectValue, g.RipeTime, g.Products[g.Products.Count - 1].RipeTime - g.RipeTime, g.Parent.SnapshotTime), "详细信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void lvwFarms_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                ListViewHitTestInfo lvhti = lvwFarms.HitTest(e.Location);
+                if (lvhti.Item != null)
+                {
+                    lvhti.Item.Selected = true;
+                    if (Settings.Default.ViewStyle == (int)ViewStyles.Time || Settings.Default.ViewStyle == (int)ViewStyles.Value)
+                        tsbViewUserProduct.Enabled = true;
+                    else
+                        tsbViewUserProduct.Enabled = false;
+                    cmsTime.Show(sender as Control, e.Location);
+                }
+            }
+            else if (e.Button == MouseButtons.Middle)
+            {
+                tbsView.Visible = !tbsView.Visible;
+                tbsOptions.Visible = !tbsOptions.Visible;
+            }
         }
         #endregion
 
@@ -773,7 +814,6 @@ namespace FarmTick
             }
             return "时间格式化错误";
         }
-
 
     }
 }
