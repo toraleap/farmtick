@@ -59,12 +59,6 @@
     </Compile>
     <Compile Include="FarmClient.cs" />
     <Compile Include="FarmTickManager.cs" />
-    <Compile Include="fNotify.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="fNotify.Designer.cs">
-      <DependentUpon>fNotify.cs</DependentUpon>
-    </Compile>
     <Compile Include="Friends.cs" />
     <Compile Include="Classes\Meadow.cs" />
     <Compile Include="Classes\Plant.cs" />
@@ -76,13 +70,16 @@
     <Compile Include="fViewUI.Designer.cs">
       <DependentUpon>fViewUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="LayeredAlphaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="fNotify.resx">
-      <DependentUpon>fNotify.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="fViewUI.resx">
       <DependentUpon>fViewUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LayeredAlphaForm.resx">
+      <DependentUpon>LayeredAlphaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -92,6 +89,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
@@ -118,6 +116,7 @@
     </Content>
     <Content Include="icon.ico" />
     <Content Include="newicon.ico" />
+    <None Include="notify.png" />
     <Content Include="res\alarm.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

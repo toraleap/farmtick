@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fViewUI));
-            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("刚成熟", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("即将收获", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("一小时以内", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup9 = new System.Windows.Forms.ListViewGroup("四小时以内", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup10 = new System.Windows.Forms.ListViewGroup("四小时以后", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("刚成熟", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("即将收获", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("一小时以内", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("四小时以内", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("四小时以后", System.Windows.Forms.HorizontalAlignment.Left);
             this.tbsView = new System.Windows.Forms.ToolStrip();
             this.tsbUITime = new System.Windows.Forms.ToolStripButton();
             this.tsbUIUser = new System.Windows.Forms.ToolStripButton();
@@ -65,6 +65,9 @@
             this.tsbNotifyNone = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbNotifyWindow = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbNotifyWindowNone = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbNotifyWindowIcon = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbNotifyWindowTransparent = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbNotifySound = new System.Windows.Forms.ToolStripMenuItem();
             this.l = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsbCaptureOptions = new System.Windows.Forms.ToolStripMenuItem();
@@ -358,11 +361,38 @@
             // 
             // tsbNotifyWindow
             // 
+            this.tsbNotifyWindow.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbNotifyWindowNone,
+            this.tsbNotifyWindowIcon,
+            this.tsbNotifyWindowTransparent});
             this.tsbNotifyWindow.Image = ((System.Drawing.Image)(resources.GetObject("tsbNotifyWindow.Image")));
             this.tsbNotifyWindow.Name = "tsbNotifyWindow";
             this.tsbNotifyWindow.Size = new System.Drawing.Size(153, 22);
             this.tsbNotifyWindow.Text = "提醒窗口(&W)";
-            this.tsbNotifyWindow.Click += new System.EventHandler(this.tsbNotifyWindow_Click);
+            // 
+            // tsbNotifyWindowNone
+            // 
+            this.tsbNotifyWindowNone.Image = ((System.Drawing.Image)(resources.GetObject("tsbNotifyWindowNone.Image")));
+            this.tsbNotifyWindowNone.Name = "tsbNotifyWindowNone";
+            this.tsbNotifyWindowNone.Size = new System.Drawing.Size(175, 22);
+            this.tsbNotifyWindowNone.Text = "无(&N)";
+            this.tsbNotifyWindowNone.Click += new System.EventHandler(this.tsbNotifyWindow_Click);
+            // 
+            // tsbNotifyWindowIcon
+            // 
+            this.tsbNotifyWindowIcon.Image = ((System.Drawing.Image)(resources.GetObject("tsbNotifyWindowIcon.Image")));
+            this.tsbNotifyWindowIcon.Name = "tsbNotifyWindowIcon";
+            this.tsbNotifyWindowIcon.Size = new System.Drawing.Size(175, 22);
+            this.tsbNotifyWindowIcon.Text = "系统通知区图标(&I)";
+            this.tsbNotifyWindowIcon.Click += new System.EventHandler(this.tsbNotifyWindow_Click);
+            // 
+            // tsbNotifyWindowTransparent
+            // 
+            this.tsbNotifyWindowTransparent.Image = ((System.Drawing.Image)(resources.GetObject("tsbNotifyWindowTransparent.Image")));
+            this.tsbNotifyWindowTransparent.Name = "tsbNotifyWindowTransparent";
+            this.tsbNotifyWindowTransparent.Size = new System.Drawing.Size(175, 22);
+            this.tsbNotifyWindowTransparent.Text = "浮动半透明提示(&T)";
+            this.tsbNotifyWindowTransparent.Click += new System.EventHandler(this.tsbNotifyWindow_Click);
             // 
             // tsbNotifySound
             // 
@@ -424,6 +454,7 @@
             this.tsbEnableDock.Name = "tsbEnableDock";
             this.tsbEnableDock.Size = new System.Drawing.Size(165, 22);
             this.tsbEnableDock.Text = "允许边缘停靠(&D)";
+            this.tsbEnableDock.Click += new System.EventHandler(this.tsbEnableDock_Click);
             // 
             // imgProduct
             // 
@@ -471,22 +502,22 @@
             this.lvwFarms.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvwFarms.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lvwFarms.FullRowSelect = true;
-            listViewGroup6.Header = "刚成熟";
-            listViewGroup6.Name = "listViewGroup1";
-            listViewGroup7.Header = "即将收获";
-            listViewGroup7.Name = "listViewGroup2";
-            listViewGroup8.Header = "一小时以内";
-            listViewGroup8.Name = "listViewGroup3";
-            listViewGroup9.Header = "四小时以内";
-            listViewGroup9.Name = "listViewGroup4";
-            listViewGroup10.Header = "四小时以后";
-            listViewGroup10.Name = "listViewGroup5";
+            listViewGroup1.Header = "刚成熟";
+            listViewGroup1.Name = "listViewGroup1";
+            listViewGroup2.Header = "即将收获";
+            listViewGroup2.Name = "listViewGroup2";
+            listViewGroup3.Header = "一小时以内";
+            listViewGroup3.Name = "listViewGroup3";
+            listViewGroup4.Header = "四小时以内";
+            listViewGroup4.Name = "listViewGroup4";
+            listViewGroup5.Header = "四小时以后";
+            listViewGroup5.Name = "listViewGroup5";
             this.lvwFarms.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup6,
-            listViewGroup7,
-            listViewGroup8,
-            listViewGroup9,
-            listViewGroup10});
+            listViewGroup1,
+            listViewGroup2,
+            listViewGroup3,
+            listViewGroup4,
+            listViewGroup5});
             this.lvwFarms.LargeImageList = this.imgProduct;
             this.lvwFarms.Location = new System.Drawing.Point(0, 24);
             this.lvwFarms.MultiSelect = false;
@@ -586,5 +617,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsbNotifyNone;
         private System.Windows.Forms.Timer tmrDock;
         private System.Windows.Forms.ToolStripMenuItem tsbEnableDock;
+        private System.Windows.Forms.ToolStripMenuItem tsbNotifyWindowNone;
+        private System.Windows.Forms.ToolStripMenuItem tsbNotifyWindowIcon;
+        private System.Windows.Forms.ToolStripMenuItem tsbNotifyWindowTransparent;
     }
 }
