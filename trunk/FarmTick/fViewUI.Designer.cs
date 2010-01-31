@@ -82,12 +82,16 @@
             this.tmrAlarm2 = new System.Windows.Forms.Timer(this.components);
             this.tmrNotifyIcon = new System.Windows.Forms.Timer(this.components);
             this.tmrDock = new System.Windows.Forms.Timer(this.components);
+            this.cmsTime = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsbViewUserProduct = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbViewStatistics = new System.Windows.Forms.ToolStripMenuItem();
             this.lvwFarms = new FarmTick.DoubleBufferedListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.tbsView.SuspendLayout();
             this.tbsOptions.SuspendLayout();
+            this.cmsTime.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbsView
@@ -492,6 +496,28 @@
             this.tmrDock.Enabled = true;
             this.tmrDock.Tick += new System.EventHandler(this.tmrDock_Tick);
             // 
+            // cmsTime
+            // 
+            this.cmsTime.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbViewStatistics,
+            this.tsbViewUserProduct});
+            this.cmsTime.Name = "cmsTime";
+            this.cmsTime.Size = new System.Drawing.Size(197, 70);
+            // 
+            // tsbViewUserProduct
+            // 
+            this.tsbViewUserProduct.Name = "tsbViewUserProduct";
+            this.tsbViewUserProduct.Size = new System.Drawing.Size(189, 22);
+            this.tsbViewUserProduct.Text = "在用户视图中跟踪(&U)";
+            this.tsbViewUserProduct.Click += new System.EventHandler(this.tsbViewUserProduct_Click);
+            // 
+            // tsbViewStatistics
+            // 
+            this.tsbViewStatistics.Name = "tsbViewStatistics";
+            this.tsbViewStatistics.Size = new System.Drawing.Size(196, 22);
+            this.tsbViewStatistics.Text = "查看本组详细信息(&S)...";
+            this.tsbViewStatistics.Click += new System.EventHandler(this.tsbViewStatistics_Click);
+            // 
             // lvwFarms
             // 
             this.lvwFarms.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -529,6 +555,7 @@
             this.lvwFarms.UseCompatibleStateImageBehavior = false;
             this.lvwFarms.View = System.Windows.Forms.View.Tile;
             this.lvwFarms.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvwFarms_MouseDoubleClick);
+            this.lvwFarms.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvwFarms_MouseUp);
             // 
             // columnHeader1
             // 
@@ -563,6 +590,7 @@
             this.tbsView.PerformLayout();
             this.tbsOptions.ResumeLayout(false);
             this.tbsOptions.PerformLayout();
+            this.cmsTime.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -620,5 +648,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsbNotifyWindowNone;
         private System.Windows.Forms.ToolStripMenuItem tsbNotifyWindowIcon;
         private System.Windows.Forms.ToolStripMenuItem tsbNotifyWindowTransparent;
+        private System.Windows.Forms.ContextMenuStrip cmsTime;
+        private System.Windows.Forms.ToolStripMenuItem tsbViewUserProduct;
+        private System.Windows.Forms.ToolStripMenuItem tsbViewStatistics;
     }
 }

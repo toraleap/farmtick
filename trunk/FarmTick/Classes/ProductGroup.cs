@@ -8,7 +8,7 @@ namespace FarmTick
     /// 产品组，包含同一用户在一段短时间内成熟的产品列表
     /// </summary>
     [Serializable]
-    public abstract class ProductGroup : IComparable
+    public class ProductGroup : IComparable
     {
         public readonly Farm Parent;
         public readonly DateTime RipeTime;
