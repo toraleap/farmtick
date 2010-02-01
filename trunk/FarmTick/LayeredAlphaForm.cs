@@ -67,8 +67,8 @@ namespace FarmTick
             opacity = 0;
             splashcount = 0;
             f.SetBitmap(b, opacity);
-            f.Left = (Screen.PrimaryScreen.WorkingArea.Width - 256) / 2;
-            f.Top = (Screen.PrimaryScreen.WorkingArea.Height - 256 - 20);
+            f.Left = (Screen.PrimaryScreen.WorkingArea.Width - b.Width) / 2;
+            f.Top = (Screen.PrimaryScreen.WorkingArea.Height - b.Height - 20);
             f.Show();
             tmrControl.Stop();
             tmrControl.Interval = 50;
