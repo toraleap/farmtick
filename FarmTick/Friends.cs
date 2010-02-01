@@ -47,11 +47,8 @@ namespace FarmTick
             foreach (Match m in mc)
             {
                 int uid = int.Parse(m.Groups["userid"].Value);
-                if (uid != MasterId)
-                {
-                    string username = UniescapeToString(m.Groups["username"].Value);
-                    UpdateFriend(ms.Groups["source"].Value, uid, username);
-                }
+                string username = UniescapeToString(m.Groups["username"].Value);
+                UpdateFriend(ms.Groups["source"].Value, uid, username);
             }
 
             FarmTickManager.NotifyFarmsChanged();

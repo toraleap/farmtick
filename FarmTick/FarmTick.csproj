@@ -115,6 +115,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="icon.ico" />
+    <None Include="komoe.png" />
     <Content Include="newicon.ico" />
     <None Include="notify.png" />
     <Content Include="res\alarm.wav">

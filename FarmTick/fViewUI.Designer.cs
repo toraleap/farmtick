@@ -30,18 +30,27 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fViewUI));
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("刚成熟", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("即将收获", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("一小时以内", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("四小时以内", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("四小时以后", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("刚成熟", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("即将收获", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("一小时以内", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup9 = new System.Windows.Forms.ListViewGroup("四小时以内", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup10 = new System.Windows.Forms.ListViewGroup("四小时以后", System.Windows.Forms.HorizontalAlignment.Left);
             this.tbsView = new System.Windows.Forms.ToolStrip();
-            this.tsbUITime = new System.Windows.Forms.ToolStripButton();
-            this.tsbUIUser = new System.Windows.Forms.ToolStripButton();
-            this.tsbUIValue = new System.Windows.Forms.ToolStripButton();
-            this.tsbUIHistory = new System.Windows.Forms.ToolStripButton();
-            this.tsbTopMost = new System.Windows.Forms.ToolStripButton();
             this.tbsOptions = new System.Windows.Forms.ToolStrip();
+            this.imgProduct = new System.Windows.Forms.ImageList(this.components);
+            this.nfyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.tmrUpdate = new System.Windows.Forms.Timer(this.components);
+            this.tmrAlarm = new System.Windows.Forms.Timer(this.components);
+            this.tmrAlarm2 = new System.Windows.Forms.Timer(this.components);
+            this.tmrNotifyIcon = new System.Windows.Forms.Timer(this.components);
+            this.tmrDock = new System.Windows.Forms.Timer(this.components);
+            this.cmsTime = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsbViewStatistics = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbViewUserProduct = new System.Windows.Forms.ToolStripMenuItem();
+            this.lvwFarms = new FarmTick.DoubleBufferedListView();
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.tsbCapture = new System.Windows.Forms.ToolStripButton();
             this.tsbDisplay = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsbTimeMode = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,20 +84,11 @@
             this.tsbAutoProxy = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbAutoClick = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbEnableDock = new System.Windows.Forms.ToolStripMenuItem();
-            this.imgProduct = new System.Windows.Forms.ImageList(this.components);
-            this.nfyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.tmrUpdate = new System.Windows.Forms.Timer(this.components);
-            this.tmrAlarm = new System.Windows.Forms.Timer(this.components);
-            this.tmrAlarm2 = new System.Windows.Forms.Timer(this.components);
-            this.tmrNotifyIcon = new System.Windows.Forms.Timer(this.components);
-            this.tmrDock = new System.Windows.Forms.Timer(this.components);
-            this.cmsTime = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsbViewUserProduct = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsbViewStatistics = new System.Windows.Forms.ToolStripMenuItem();
-            this.lvwFarms = new FarmTick.DoubleBufferedListView();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.tsbUITime = new System.Windows.Forms.ToolStripButton();
+            this.tsbUIUser = new System.Windows.Forms.ToolStripButton();
+            this.tsbUIValue = new System.Windows.Forms.ToolStripButton();
+            this.tsbUIHistory = new System.Windows.Forms.ToolStripButton();
+            this.tsbTopMost = new System.Windows.Forms.ToolStripButton();
             this.tbsView.SuspendLayout();
             this.tbsOptions.SuspendLayout();
             this.cmsTime.SuspendLayout();
@@ -110,54 +110,6 @@
             this.tbsView.TabIndex = 7;
             this.tbsView.Text = "toolStrip1";
             // 
-            // tsbUITime
-            // 
-            this.tsbUITime.Image = ((System.Drawing.Image)(resources.GetObject("tsbUITime.Image")));
-            this.tsbUITime.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbUITime.Name = "tsbUITime";
-            this.tsbUITime.Size = new System.Drawing.Size(52, 21);
-            this.tsbUITime.Text = "时间";
-            this.tsbUITime.Click += new System.EventHandler(this.tsbViewStyle_Click);
-            // 
-            // tsbUIUser
-            // 
-            this.tsbUIUser.Image = ((System.Drawing.Image)(resources.GetObject("tsbUIUser.Image")));
-            this.tsbUIUser.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbUIUser.Name = "tsbUIUser";
-            this.tsbUIUser.Size = new System.Drawing.Size(52, 21);
-            this.tsbUIUser.Text = "用户";
-            this.tsbUIUser.Click += new System.EventHandler(this.tsbViewStyle_Click);
-            // 
-            // tsbUIValue
-            // 
-            this.tsbUIValue.Image = ((System.Drawing.Image)(resources.GetObject("tsbUIValue.Image")));
-            this.tsbUIValue.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbUIValue.Name = "tsbUIValue";
-            this.tsbUIValue.Size = new System.Drawing.Size(52, 21);
-            this.tsbUIValue.Text = "价值";
-            this.tsbUIValue.Click += new System.EventHandler(this.tsbViewStyle_Click);
-            // 
-            // tsbUIHistory
-            // 
-            this.tsbUIHistory.Image = ((System.Drawing.Image)(resources.GetObject("tsbUIHistory.Image")));
-            this.tsbUIHistory.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbUIHistory.Name = "tsbUIHistory";
-            this.tsbUIHistory.Size = new System.Drawing.Size(52, 21);
-            this.tsbUIHistory.Text = "可收";
-            this.tsbUIHistory.Click += new System.EventHandler(this.tsbViewStyle_Click);
-            // 
-            // tsbTopMost
-            // 
-            this.tsbTopMost.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsbTopMost.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbTopMost.Image = ((System.Drawing.Image)(resources.GetObject("tsbTopMost.Image")));
-            this.tsbTopMost.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbTopMost.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbTopMost.Name = "tsbTopMost";
-            this.tsbTopMost.Size = new System.Drawing.Size(23, 21);
-            this.tsbTopMost.Text = "置顶";
-            this.tsbTopMost.Click += new System.EventHandler(this.tsbTopMost_Click);
-            // 
             // tbsOptions
             // 
             this.tbsOptions.AutoSize = false;
@@ -173,6 +125,117 @@
             this.tbsOptions.Size = new System.Drawing.Size(236, 24);
             this.tbsOptions.TabIndex = 8;
             this.tbsOptions.Text = "toolStrip1";
+            // 
+            // imgProduct
+            // 
+            this.imgProduct.ColorDepth = System.Windows.Forms.ColorDepth.Depth24Bit;
+            this.imgProduct.ImageSize = new System.Drawing.Size(61, 61);
+            this.imgProduct.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // nfyIcon
+            // 
+            this.nfyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("nfyIcon.Icon")));
+            this.nfyIcon.Text = "FarmTick v1.0";
+            this.nfyIcon.Visible = true;
+            this.nfyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.nfyIcon_MouseDoubleClick);
+            // 
+            // tmrUpdate
+            // 
+            this.tmrUpdate.Enabled = true;
+            this.tmrUpdate.Interval = 1000;
+            this.tmrUpdate.Tick += new System.EventHandler(this.tmrUpdate_Tick);
+            // 
+            // tmrAlarm
+            // 
+            this.tmrAlarm.Tick += new System.EventHandler(this.tmrAlarm_Tick);
+            // 
+            // tmrAlarm2
+            // 
+            this.tmrAlarm2.Tick += new System.EventHandler(this.tmrAlarm2_Tick);
+            // 
+            // tmrNotifyIcon
+            // 
+            this.tmrNotifyIcon.Tick += new System.EventHandler(this.tmrNotifyIcon_Tick);
+            // 
+            // tmrDock
+            // 
+            this.tmrDock.Enabled = true;
+            this.tmrDock.Tick += new System.EventHandler(this.tmrDock_Tick);
+            // 
+            // cmsTime
+            // 
+            this.cmsTime.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbViewStatistics,
+            this.tsbViewUserProduct});
+            this.cmsTime.Name = "cmsTime";
+            this.cmsTime.Size = new System.Drawing.Size(197, 48);
+            // 
+            // tsbViewStatistics
+            // 
+            this.tsbViewStatistics.Image = ((System.Drawing.Image)(resources.GetObject("tsbViewStatistics.Image")));
+            this.tsbViewStatistics.Name = "tsbViewStatistics";
+            this.tsbViewStatistics.Size = new System.Drawing.Size(196, 22);
+            this.tsbViewStatistics.Text = "查看本组详细信息(&S)...";
+            this.tsbViewStatistics.Click += new System.EventHandler(this.tsbViewStatistics_Click);
+            // 
+            // tsbViewUserProduct
+            // 
+            this.tsbViewUserProduct.Image = ((System.Drawing.Image)(resources.GetObject("tsbViewUserProduct.Image")));
+            this.tsbViewUserProduct.Name = "tsbViewUserProduct";
+            this.tsbViewUserProduct.Size = new System.Drawing.Size(196, 22);
+            this.tsbViewUserProduct.Text = "在用户视图中跟踪(&U)";
+            this.tsbViewUserProduct.Click += new System.EventHandler(this.tsbViewUserProduct_Click);
+            // 
+            // lvwFarms
+            // 
+            this.lvwFarms.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lvwFarms.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
+            this.lvwFarms.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvwFarms.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lvwFarms.FullRowSelect = true;
+            listViewGroup6.Header = "刚成熟";
+            listViewGroup6.Name = "listViewGroup1";
+            listViewGroup7.Header = "即将收获";
+            listViewGroup7.Name = "listViewGroup2";
+            listViewGroup8.Header = "一小时以内";
+            listViewGroup8.Name = "listViewGroup3";
+            listViewGroup9.Header = "四小时以内";
+            listViewGroup9.Name = "listViewGroup4";
+            listViewGroup10.Header = "四小时以后";
+            listViewGroup10.Name = "listViewGroup5";
+            this.lvwFarms.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
+            listViewGroup6,
+            listViewGroup7,
+            listViewGroup8,
+            listViewGroup9,
+            listViewGroup10});
+            this.lvwFarms.LargeImageList = this.imgProduct;
+            this.lvwFarms.Location = new System.Drawing.Point(0, 24);
+            this.lvwFarms.MultiSelect = false;
+            this.lvwFarms.Name = "lvwFarms";
+            this.lvwFarms.Size = new System.Drawing.Size(236, 365);
+            this.lvwFarms.SmallImageList = this.imgProduct;
+            this.lvwFarms.TabIndex = 5;
+            this.lvwFarms.TileSize = new System.Drawing.Size(218, 64);
+            this.lvwFarms.UseCompatibleStateImageBehavior = false;
+            this.lvwFarms.View = System.Windows.Forms.View.Tile;
+            this.lvwFarms.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvwFarms_MouseDoubleClick);
+            this.lvwFarms.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvwFarms_MouseUp);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "好友昵称";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "产品成熟时间";
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "预计收益";
             // 
             // tsbCapture
             // 
@@ -460,114 +523,53 @@
             this.tsbEnableDock.Text = "允许边缘停靠(&D)";
             this.tsbEnableDock.Click += new System.EventHandler(this.tsbEnableDock_Click);
             // 
-            // imgProduct
+            // tsbUITime
             // 
-            this.imgProduct.ColorDepth = System.Windows.Forms.ColorDepth.Depth24Bit;
-            this.imgProduct.ImageSize = new System.Drawing.Size(61, 61);
-            this.imgProduct.TransparentColor = System.Drawing.Color.Transparent;
+            this.tsbUITime.Image = ((System.Drawing.Image)(resources.GetObject("tsbUITime.Image")));
+            this.tsbUITime.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbUITime.Name = "tsbUITime";
+            this.tsbUITime.Size = new System.Drawing.Size(52, 21);
+            this.tsbUITime.Text = "时间";
+            this.tsbUITime.Click += new System.EventHandler(this.tsbViewStyle_Click);
             // 
-            // nfyIcon
+            // tsbUIUser
             // 
-            this.nfyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("nfyIcon.Icon")));
-            this.nfyIcon.Text = "FarmTick v1.0";
-            this.nfyIcon.Visible = true;
-            this.nfyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.nfyIcon_MouseDoubleClick);
+            this.tsbUIUser.Image = ((System.Drawing.Image)(resources.GetObject("tsbUIUser.Image")));
+            this.tsbUIUser.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbUIUser.Name = "tsbUIUser";
+            this.tsbUIUser.Size = new System.Drawing.Size(52, 21);
+            this.tsbUIUser.Text = "用户";
+            this.tsbUIUser.Click += new System.EventHandler(this.tsbViewStyle_Click);
             // 
-            // tmrUpdate
+            // tsbUIValue
             // 
-            this.tmrUpdate.Enabled = true;
-            this.tmrUpdate.Interval = 1000;
-            this.tmrUpdate.Tick += new System.EventHandler(this.tmrUpdate_Tick);
+            this.tsbUIValue.Image = ((System.Drawing.Image)(resources.GetObject("tsbUIValue.Image")));
+            this.tsbUIValue.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbUIValue.Name = "tsbUIValue";
+            this.tsbUIValue.Size = new System.Drawing.Size(52, 21);
+            this.tsbUIValue.Text = "价值";
+            this.tsbUIValue.Click += new System.EventHandler(this.tsbViewStyle_Click);
             // 
-            // tmrAlarm
+            // tsbUIHistory
             // 
-            this.tmrAlarm.Tick += new System.EventHandler(this.tmrAlarm_Tick);
+            this.tsbUIHistory.Image = ((System.Drawing.Image)(resources.GetObject("tsbUIHistory.Image")));
+            this.tsbUIHistory.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbUIHistory.Name = "tsbUIHistory";
+            this.tsbUIHistory.Size = new System.Drawing.Size(52, 21);
+            this.tsbUIHistory.Text = "可收";
+            this.tsbUIHistory.Click += new System.EventHandler(this.tsbViewStyle_Click);
             // 
-            // tmrAlarm2
+            // tsbTopMost
             // 
-            this.tmrAlarm2.Tick += new System.EventHandler(this.tmrAlarm2_Tick);
-            // 
-            // tmrNotifyIcon
-            // 
-            this.tmrNotifyIcon.Tick += new System.EventHandler(this.tmrNotifyIcon_Tick);
-            // 
-            // tmrDock
-            // 
-            this.tmrDock.Enabled = true;
-            this.tmrDock.Tick += new System.EventHandler(this.tmrDock_Tick);
-            // 
-            // cmsTime
-            // 
-            this.cmsTime.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbViewStatistics,
-            this.tsbViewUserProduct});
-            this.cmsTime.Name = "cmsTime";
-            this.cmsTime.Size = new System.Drawing.Size(197, 70);
-            // 
-            // tsbViewUserProduct
-            // 
-            this.tsbViewUserProduct.Name = "tsbViewUserProduct";
-            this.tsbViewUserProduct.Size = new System.Drawing.Size(189, 22);
-            this.tsbViewUserProduct.Text = "在用户视图中跟踪(&U)";
-            this.tsbViewUserProduct.Click += new System.EventHandler(this.tsbViewUserProduct_Click);
-            // 
-            // tsbViewStatistics
-            // 
-            this.tsbViewStatistics.Name = "tsbViewStatistics";
-            this.tsbViewStatistics.Size = new System.Drawing.Size(196, 22);
-            this.tsbViewStatistics.Text = "查看本组详细信息(&S)...";
-            this.tsbViewStatistics.Click += new System.EventHandler(this.tsbViewStatistics_Click);
-            // 
-            // lvwFarms
-            // 
-            this.lvwFarms.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lvwFarms.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
-            this.lvwFarms.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvwFarms.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lvwFarms.FullRowSelect = true;
-            listViewGroup1.Header = "刚成熟";
-            listViewGroup1.Name = "listViewGroup1";
-            listViewGroup2.Header = "即将收获";
-            listViewGroup2.Name = "listViewGroup2";
-            listViewGroup3.Header = "一小时以内";
-            listViewGroup3.Name = "listViewGroup3";
-            listViewGroup4.Header = "四小时以内";
-            listViewGroup4.Name = "listViewGroup4";
-            listViewGroup5.Header = "四小时以后";
-            listViewGroup5.Name = "listViewGroup5";
-            this.lvwFarms.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2,
-            listViewGroup3,
-            listViewGroup4,
-            listViewGroup5});
-            this.lvwFarms.LargeImageList = this.imgProduct;
-            this.lvwFarms.Location = new System.Drawing.Point(0, 24);
-            this.lvwFarms.MultiSelect = false;
-            this.lvwFarms.Name = "lvwFarms";
-            this.lvwFarms.Size = new System.Drawing.Size(236, 365);
-            this.lvwFarms.SmallImageList = this.imgProduct;
-            this.lvwFarms.TabIndex = 5;
-            this.lvwFarms.TileSize = new System.Drawing.Size(218, 64);
-            this.lvwFarms.UseCompatibleStateImageBehavior = false;
-            this.lvwFarms.View = System.Windows.Forms.View.Tile;
-            this.lvwFarms.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvwFarms_MouseDoubleClick);
-            this.lvwFarms.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvwFarms_MouseUp);
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "好友昵称";
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "产品成熟时间";
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "预计收益";
+            this.tsbTopMost.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsbTopMost.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbTopMost.Image = ((System.Drawing.Image)(resources.GetObject("tsbTopMost.Image")));
+            this.tsbTopMost.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbTopMost.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbTopMost.Name = "tsbTopMost";
+            this.tsbTopMost.Size = new System.Drawing.Size(23, 21);
+            this.tsbTopMost.Text = "置顶";
+            this.tsbTopMost.Click += new System.EventHandler(this.tsbTopMost_Click);
             // 
             // fViewUI
             // 
