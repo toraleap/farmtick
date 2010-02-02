@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -127,7 +128,7 @@ namespace FarmTick
         protected override void WndProc(ref Message m)
         {
             const int WM_HOTKEY = 0x0312;
-            //按快捷键 
+            // 按快捷键 
             if (Settings.Default.FastClickHotkey && m.Msg == WM_HOTKEY && !AutoClickProcessing && m.WParam.ToInt32() == 100)
             {
                 AutoClickProcessing = true;
@@ -347,19 +348,19 @@ namespace FarmTick
 
         private void nfyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (e.Button != MouseButtons.Left) return;
+            if (e.Button == MouseButtons.Left) tsbActivateWindow_Click(null, null);
+        }
 
-            if (WindowState == FormWindowState.Minimized)
-            {
-                Visible = true;
-                WindowState = originwindowstate;
-            }
-            else
-            {
-                originwindowstate = WindowState;
-                WindowState = FormWindowState.Minimized;
-                Visible = false;
-            }
+        private void tsbActivateWindow_Click(object sender, EventArgs e)
+        {
+            Visible = true;
+            Activate();
+            WindowState = originwindowstate;
+        }
+
+        private void tsbExit_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         private void tsbTopMost_Click(object sender, EventArgs e)
@@ -527,6 +528,26 @@ namespace FarmTick
             ProductGroup g = lvwFarms.SelectedItems[0].Tag as ProductGroup;
             string source = (Friends.FriendMapXiaoyou.ContainsKey(g.OwnerId) ? "校友 " : "") + (Friends.FriendMapQzone.ContainsKey(g.OwnerId) ? "空间 " : "");
             MessageBox.Show(String.Format("{0}[ID:{1}] 的产品详细信息\n\n好友类型: {2}\n本组产品: {3}\n预期价值: {4} 金币\n首先成熟: {5}\n收获耗时: {6}\n\n注: 以上信息为 {7} 获得的数据。", g.OwnerName, g.OwnerId, source, g.ProductString, g.ExpectValue, g.RipeTime, g.Products[g.Products.Count - 1].RipeTime - g.RipeTime, g.Parent.SnapshotTime), "详细信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void tsbHelpMainsite_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://farmtick.googlecode.com");
+        }
+
+        private void tsbHelpDeveloper_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://code.google.com/p/farmtick/source/checkout");
+        }
+
+        private void tsbHelpOnline_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://code.google.com/p/farmtick/w/list");
+        }
+
+        private void tsbHelpSuggest_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://code.google.com/p/farmtick/issues/list");
         }
 
         private void lvwFarms_MouseUp(object sender, MouseEventArgs e)
@@ -813,6 +834,16 @@ namespace FarmTick
                         return String.Format("{0}小时{1}分钟前 {2}", (int)(-ts).TotalHours, (-ts).Minutes, dt.ToLongTimeString());
             }
             return "时间格式化错误";
+        }
+
+        private void tsbTestNotify_Click(object sender, EventArgs e)
+        {
+            if (tmrAlarm.Enabled == true)
+                tmrAlarm_Tick(null, null);
+            else if (tmrAlarm2.Enabled == true)
+                tmrAlarm2_Tick(null, null);
+            else
+                MessageBox.Show("目前没有预定的提醒。\n请变更提醒条件或更新农场信息。", "预览下个提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
     }
