@@ -78,6 +78,16 @@ namespace FarmTick
             Transparent
         }
 
+        /// <summary>
+        /// 列表项尺寸枚举
+        /// </summary>
+        public enum TileSizes
+        {
+            Large,
+            Medium,
+            Small
+        }
+
         bool LocationChangedByUser = false;
 
         public fViewUI()
@@ -87,8 +97,6 @@ namespace FarmTick
 
         private void fViewUI_Load(object sender, EventArgs e)
         {
-            LoadImages();
-
             // 尝试启用Vista风格
             if (Environment.OSVersion.Version.Major >= 6) Api.VistaTheme.SetListViewTheme(lvwFarms);
             // 恢复窗口大小和位置
@@ -113,6 +121,8 @@ namespace FarmTick
             }
             if (Settings.Default.FastClickHotkey) Api.Hotkeys.RegisterHotKey(Handle, 100, FarmTick.Api.Hotkeys.KeyModifiers.WindowsKey | FarmTick.Api.Hotkeys.KeyModifiers.Shift, Keys.C);
             FarmTickManager.FarmsChanged += OnFarmsChanged;
+            LoadImages();
+            UpdateListViewImages();
             ClearView();
             UpdateAlarm();
         }
@@ -167,25 +177,39 @@ namespace FarmTick
                 if (ViewFilter(g))
                 {
                     // 是否已存在
-                    if (dgl.ContainsKey(g))
+                    if (!dgl.ContainsKey(g))
                     {
-                        string ripetime = FormatTime(g.RipeTime);
-                        ListViewGroup lvg = GetItemGroup(g);
-                        lvi = dgl[g];
-                        if (lvi.Text != g.OwnerName) lvi.Text = g.OwnerName;
-                        if (lvi.SubItems[2].Text != ripetime) lvi.SubItems[2].Text = ripetime;
-                        if (lvi.Group != lvg) lvi.Group = lvg;
-                    }
-                    else
-                    {
-                        lvi = new ListViewItem(new string[] { 
-                                    g.Parent.OwnerName, 
-                                    String.Format("{0} {1}金币", g.ProductString, g.ExpectValue.ToString()),
-                                    FormatTime(g.RipeTime) },
-                            g.RipeName, GetItemGroup(g));
+                        lvi = new ListViewItem(new string[] { String.Empty, String.Empty, String.Empty }, g.RipeName, GetItemGroup(g));
                         lvi.Tag = g;
                         dgl.Add(g, lvi);
                         lvwFarms.Items.Add(lvi);
+                    }
+
+                    ListViewGroup lvg = GetItemGroup(g);
+                    lvi = dgl[g];
+
+                    if (lvi.Group != lvg) lvi.Group = lvg;
+                    switch ((TileSizes)Settings.Default.TileSize)
+                    {
+                        case TileSizes.Large:
+                            string str01 = String.Format("{0} {1}金币", g.ProductString, g.ExpectValue);
+                            string str02 = FormatTime(g.RipeTime);
+                            if (lvi.Text != g.OwnerName) lvi.Text = g.OwnerName;
+                            if (lvi.SubItems[1].Text != str01) lvi.SubItems[1].Text = str01;
+                            if (lvi.SubItems[2].Text != str02) lvi.SubItems[2].Text = str02;
+                            break;
+                        case TileSizes.Medium:
+                            string str10 = String.Format("{0} (x{1})", g.OwnerName, g.Products.Count);
+                            string str11 = String.Format("{0} ￥{1}", FormatTime(g.RipeTime), g.ExpectValue);
+                            if (lvi.Text != str10) lvi.Text = str10;
+                            if (lvi.SubItems[1].Text != str11) lvi.SubItems[1].Text = str11;
+                            break;
+                        case TileSizes.Small:
+                            string str20 = String.Format("{0} (x{1})", g.OwnerName, g.Products.Count);
+                            string str21 = String.Format("{0} ￥{1}", FormatTime(g.RipeTime), g.ExpectValue);
+                            if (lvi.Text != str20) lvi.Text = str20;
+                            if (lvi.SubItems[1].Text != str21) lvi.SubItems[1].Text = str21;
+                            break;
                     }
                 }
                 else
@@ -434,6 +458,23 @@ namespace FarmTick
             UpdateAlarm();
         }
 
+        private void tsbTileSize_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem[] tsbTileGroup = new ToolStripMenuItem[] { tsbTileLarge, tsbTileMedium, tsbTileSmall };
+            for (int i = 0; i < tsbTileGroup.Length; i++)
+            {
+                if (tsbTileGroup[i] == sender as ToolStripMenuItem)
+                {
+                    tsbTileGroup[i].Checked = true;
+                    Settings.Default.TileSize = i;
+                }
+                else
+                    tsbTileGroup[i].Checked = false;
+            }
+            UpdateListViewImages();
+            ClearView();
+        }
+
         private void tsbCapture_Click(object sender, EventArgs e)
         {
             tsbCapture.Checked = !tsbCapture.Checked;
@@ -469,7 +510,7 @@ namespace FarmTick
         private void tsbShowHungry_Click(object sender, EventArgs e)
         {
             Settings.Default.ShowHungry = !Settings.Default.ShowHungry;
-            tsbAutoCapture.Checked = Settings.Default.ShowHungry;
+            tsbShowHungry.Checked = Settings.Default.ShowHungry;
             ClearView();
         }
 
@@ -624,6 +665,7 @@ namespace FarmTick
             }
             LocationChangedByUser = true;
         }
+
         /// <summary>
         /// 载入农牧场产品的图像文件
         /// </summary>
@@ -632,6 +674,7 @@ namespace FarmTick
             try
             {
                 DirectoryInfo di = new DirectoryInfo(@".\res");
+
                 foreach (FileInfo fi in di.GetFiles("*.gif"))
                 {
                     imgProduct.Images.Add(fi.Name.Substring(0, fi.Name.LastIndexOf('.')), Image.FromFile(fi.FullName));
@@ -642,6 +685,56 @@ namespace FarmTick
                 MessageBox.Show("图像文件夹res没有找到，无法显示图像！" + exception.ToString(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        /// <summary>
+        /// 更新列表所用的图像文件
+        /// </summary>
+        private void UpdateListViewImages()
+        {
+            Image img = null;
+            Graphics g = null;
+
+            lvwFarms.Items.Clear();
+            switch ((TileSizes)Settings.Default.TileSize)
+            {
+                case TileSizes.Large:
+                    imgView.ImageSize = new Size(61, 61);
+                    lvwFarms.TileSize = new Size(218, 64);
+                    break;
+                case TileSizes.Medium:
+                    imgView.ImageSize = new Size(44, 44);
+                    lvwFarms.TileSize = new Size(218, 48);
+                    break;
+                case TileSizes.Small:
+                    imgView.ImageSize = new Size(32, 32);
+                    lvwFarms.TileSize = new Size(218, 36);
+                    break;
+            }
+
+            foreach (string imagestr in imgProduct.Images.Keys)
+            {
+                switch ((TileSizes)Settings.Default.TileSize)
+                {
+                    case TileSizes.Large:
+                        img = imgProduct.Images[imagestr];
+                        break;
+                    case TileSizes.Medium:
+                        img = new Bitmap(48, 48);
+                        g = Graphics.FromImage(img);
+                        g.DrawImage(imgProduct.Images[imagestr], new Rectangle(0, 0, 44, 44), new Rectangle(8, 8, 44, 44), GraphicsUnit.Pixel);
+                        //g.DrawRectangle(Pens.DarkBlue, 0, 0, 44, 44);
+                        break;
+                    case TileSizes.Small:
+                        img = new Bitmap(32, 32);
+                        g = Graphics.FromImage(img);
+                        g.DrawImage(imgProduct.Images[imagestr], new Rectangle(0, 0, 32, 32), new Rectangle(8, 8, 44, 44), GraphicsUnit.Pixel);
+                        //g.DrawRectangle(Pens.DarkBlue, 0, 0, 32, 32);
+                        break;
+                }
+                imgView.Images.Add(imagestr, img);
+            }
+        }
+
 
         /// <summary>
         /// 载入设置后设置界面
@@ -663,10 +756,12 @@ namespace FarmTick
             ToolStripMenuItem[] tsbNotifyWindowGroup = new ToolStripMenuItem[] { tsbNotifyWindowNone, tsbNotifyWindowIcon, tsbNotifyWindowTransparent };
             tsbNotifyWindowGroup[(int)Settings.Default.NotifyWindow].Checked = true;
 
+            ToolStripMenuItem[] tsbTileGroup = new ToolStripMenuItem[] { tsbTileLarge, tsbTileMedium, tsbTileSmall };
+            tsbTileGroup[(int)Settings.Default.TileSize].Checked = true;
+
             tsbShowHungry.Checked = Settings.Default.ShowHungry;
 
             tsbNotifySound.Checked = Settings.Default.NotifySound;
-            tsbNotifyWindow.Checked = Settings.Default.NotifyWindow > 0;
             tsbAlarm.Checked = Settings.Default.Timer60Sec;
             tsbAlarm2.Checked = Settings.Default.Timer10Sec;
 

@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fViewUI));
-            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("刚成熟", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("即将收获", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("一小时以内", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup9 = new System.Windows.Forms.ListViewGroup("四小时以内", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup10 = new System.Windows.Forms.ListViewGroup("四小时以后", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("刚成熟", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("即将收获", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("一小时以内", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("四小时以内", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("四小时以后", System.Windows.Forms.HorizontalAlignment.Left);
             this.tbsView = new System.Windows.Forms.ToolStrip();
             this.tsbUITime = new System.Windows.Forms.ToolStripButton();
             this.tsbUIUser = new System.Windows.Forms.ToolStripButton();
@@ -51,6 +51,11 @@
             this.tsbNameModeBoth = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbNameModeXiaoyou = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbNameModeQzone = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbTileSize = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbTileLarge = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbTileMedium = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbTileSmall = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbShowHungry = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbNotify = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsbAlarm = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,12 +75,18 @@
             this.tsbNotifySound = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbTestNotify = new System.Windows.Forms.ToolStripMenuItem();
-            this.l = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsbOptions = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsbCaptureOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbAutoCapture = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbAutoProxy = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbAutoClick = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbEnableDock = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbHelpMainsite = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbHelpDeveloper = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbHelpOnline = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbHelpSuggest = new System.Windows.Forms.ToolStripMenuItem();
             this.imgProduct = new System.Windows.Forms.ImageList();
             this.nfyIcon = new System.Windows.Forms.NotifyIcon();
             this.cmsIcon = new System.Windows.Forms.ContextMenuStrip();
@@ -90,16 +101,11 @@
             this.cmsTime = new System.Windows.Forms.ContextMenuStrip();
             this.tsbViewStatistics = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbViewUserProduct = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsbHelpMainsite = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsbHelpDeveloper = new System.Windows.Forms.ToolStripMenuItem();
+            this.imgView = new System.Windows.Forms.ImageList();
             this.lvwFarms = new FarmTick.DoubleBufferedListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.tsbHelpOnline = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsbHelpSuggest = new System.Windows.Forms.ToolStripMenuItem();
             this.tbsView.SuspendLayout();
             this.tbsOptions.SuspendLayout();
             this.cmsIcon.SuspendLayout();
@@ -179,7 +185,7 @@
             this.tsbCapture,
             this.tsbDisplay,
             this.tsbNotify,
-            this.l});
+            this.tsbOptions});
             this.tbsOptions.Location = new System.Drawing.Point(0, 389);
             this.tbsOptions.Name = "tbsOptions";
             this.tbsOptions.Size = new System.Drawing.Size(236, 24);
@@ -201,6 +207,8 @@
             this.tsbDisplay.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbTimeMode,
             this.tsbNameMode,
+            this.tsbTileSize,
+            this.toolStripMenuItem6,
             this.tsbShowHungry});
             this.tsbDisplay.Image = ((System.Drawing.Image)(resources.GetObject("tsbDisplay.Image")));
             this.tsbDisplay.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -271,6 +279,43 @@
             this.tsbNameModeQzone.Size = new System.Drawing.Size(140, 22);
             this.tsbNameModeQzone.Text = "空间优先(&Z)";
             this.tsbNameModeQzone.Click += new System.EventHandler(this.tsbNameMode_Click);
+            // 
+            // tsbTileSize
+            // 
+            this.tsbTileSize.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbTileLarge,
+            this.tsbTileMedium,
+            this.tsbTileSmall});
+            this.tsbTileSize.Image = ((System.Drawing.Image)(resources.GetObject("tsbTileSize.Image")));
+            this.tsbTileSize.Name = "tsbTileSize";
+            this.tsbTileSize.Size = new System.Drawing.Size(166, 22);
+            this.tsbTileSize.Text = "列表项尺寸(&S)";
+            // 
+            // tsbTileLarge
+            // 
+            this.tsbTileLarge.Name = "tsbTileLarge";
+            this.tsbTileLarge.Size = new System.Drawing.Size(144, 22);
+            this.tsbTileLarge.Text = "大图标(&L)";
+            this.tsbTileLarge.Click += new System.EventHandler(this.tsbTileSize_Click);
+            // 
+            // tsbTileMedium
+            // 
+            this.tsbTileMedium.Name = "tsbTileMedium";
+            this.tsbTileMedium.Size = new System.Drawing.Size(144, 22);
+            this.tsbTileMedium.Text = "中等图标(&M)";
+            this.tsbTileMedium.Click += new System.EventHandler(this.tsbTileSize_Click);
+            // 
+            // tsbTileSmall
+            // 
+            this.tsbTileSmall.Name = "tsbTileSmall";
+            this.tsbTileSmall.Size = new System.Drawing.Size(144, 22);
+            this.tsbTileSmall.Text = "小图标(&S)";
+            this.tsbTileSmall.Click += new System.EventHandler(this.tsbTileSize_Click);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(163, 6);
             // 
             // tsbShowHungry
             // 
@@ -433,19 +478,19 @@
             this.tsbTestNotify.Text = "预览下个提醒(&E)";
             this.tsbTestNotify.Click += new System.EventHandler(this.tsbTestNotify_Click);
             // 
-            // l
+            // tsbOptions
             // 
-            this.l.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbOptions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbCaptureOptions,
             this.tsbAutoClick,
             this.tsbEnableDock,
             this.toolStripMenuItem5,
             this.tsbHelp});
-            this.l.Image = ((System.Drawing.Image)(resources.GetObject("l.Image")));
-            this.l.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.l.Name = "l";
-            this.l.Size = new System.Drawing.Size(61, 21);
-            this.l.Text = "设置";
+            this.tsbOptions.Image = ((System.Drawing.Image)(resources.GetObject("tsbOptions.Image")));
+            this.tsbOptions.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbOptions.Name = "tsbOptions";
+            this.tsbOptions.Size = new System.Drawing.Size(61, 21);
+            this.tsbOptions.Text = "设置";
             // 
             // tsbCaptureOptions
             // 
@@ -488,6 +533,55 @@
             this.tsbEnableDock.Size = new System.Drawing.Size(165, 22);
             this.tsbEnableDock.Text = "允许边缘停靠(&D)";
             this.tsbEnableDock.Click += new System.EventHandler(this.tsbEnableDock_Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(162, 6);
+            // 
+            // tsbHelp
+            // 
+            this.tsbHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbHelpMainsite,
+            this.tsbHelpDeveloper,
+            this.tsbHelpOnline,
+            this.tsbHelpSuggest});
+            this.tsbHelp.Image = ((System.Drawing.Image)(resources.GetObject("tsbHelp.Image")));
+            this.tsbHelp.Name = "tsbHelp";
+            this.tsbHelp.Size = new System.Drawing.Size(165, 22);
+            this.tsbHelp.Text = "帮助(&H)";
+            // 
+            // tsbHelpMainsite
+            // 
+            this.tsbHelpMainsite.Image = ((System.Drawing.Image)(resources.GetObject("tsbHelpMainsite.Image")));
+            this.tsbHelpMainsite.Name = "tsbHelpMainsite";
+            this.tsbHelpMainsite.Size = new System.Drawing.Size(153, 22);
+            this.tsbHelpMainsite.Text = "转到主站(&H)";
+            this.tsbHelpMainsite.Click += new System.EventHandler(this.tsbHelpMainsite_Click);
+            // 
+            // tsbHelpDeveloper
+            // 
+            this.tsbHelpDeveloper.Image = ((System.Drawing.Image)(resources.GetObject("tsbHelpDeveloper.Image")));
+            this.tsbHelpDeveloper.Name = "tsbHelpDeveloper";
+            this.tsbHelpDeveloper.Size = new System.Drawing.Size(153, 22);
+            this.tsbHelpDeveloper.Text = "转到开发版(&D)";
+            this.tsbHelpDeveloper.Click += new System.EventHandler(this.tsbHelpDeveloper_Click);
+            // 
+            // tsbHelpOnline
+            // 
+            this.tsbHelpOnline.Image = ((System.Drawing.Image)(resources.GetObject("tsbHelpOnline.Image")));
+            this.tsbHelpOnline.Name = "tsbHelpOnline";
+            this.tsbHelpOnline.Size = new System.Drawing.Size(153, 22);
+            this.tsbHelpOnline.Text = "在线帮助(&O)";
+            this.tsbHelpOnline.Click += new System.EventHandler(this.tsbHelpOnline_Click);
+            // 
+            // tsbHelpSuggest
+            // 
+            this.tsbHelpSuggest.Image = ((System.Drawing.Image)(resources.GetObject("tsbHelpSuggest.Image")));
+            this.tsbHelpSuggest.Name = "tsbHelpSuggest";
+            this.tsbHelpSuggest.Size = new System.Drawing.Size(153, 22);
+            this.tsbHelpSuggest.Text = "意见建议(&S)";
+            this.tsbHelpSuggest.Click += new System.EventHandler(this.tsbHelpSuggest_Click);
             // 
             // imgProduct
             // 
@@ -580,38 +674,11 @@
             this.tsbViewUserProduct.Text = "在用户视图中跟踪(&U)";
             this.tsbViewUserProduct.Click += new System.EventHandler(this.tsbViewUserProduct_Click);
             // 
-            // toolStripMenuItem5
+            // imgView
             // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(162, 6);
-            // 
-            // tsbHelp
-            // 
-            this.tsbHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbHelpMainsite,
-            this.tsbHelpDeveloper,
-            this.tsbHelpOnline,
-            this.tsbHelpSuggest});
-            this.tsbHelp.Image = ((System.Drawing.Image)(resources.GetObject("tsbHelp.Image")));
-            this.tsbHelp.Name = "tsbHelp";
-            this.tsbHelp.Size = new System.Drawing.Size(165, 22);
-            this.tsbHelp.Text = "帮助(&H)";
-            // 
-            // tsbHelpMainsite
-            // 
-            this.tsbHelpMainsite.Image = ((System.Drawing.Image)(resources.GetObject("tsbHelpMainsite.Image")));
-            this.tsbHelpMainsite.Name = "tsbHelpMainsite";
-            this.tsbHelpMainsite.Size = new System.Drawing.Size(153, 22);
-            this.tsbHelpMainsite.Text = "转到主站(&H)";
-            this.tsbHelpMainsite.Click += new System.EventHandler(this.tsbHelpMainsite_Click);
-            // 
-            // tsbHelpDeveloper
-            // 
-            this.tsbHelpDeveloper.Image = ((System.Drawing.Image)(resources.GetObject("tsbHelpDeveloper.Image")));
-            this.tsbHelpDeveloper.Name = "tsbHelpDeveloper";
-            this.tsbHelpDeveloper.Size = new System.Drawing.Size(153, 22);
-            this.tsbHelpDeveloper.Text = "转到开发版(&D)";
-            this.tsbHelpDeveloper.Click += new System.EventHandler(this.tsbHelpDeveloper_Click);
+            this.imgView.ColorDepth = System.Windows.Forms.ColorDepth.Depth24Bit;
+            this.imgView.ImageSize = new System.Drawing.Size(16, 16);
+            this.imgView.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // lvwFarms
             // 
@@ -623,28 +690,28 @@
             this.lvwFarms.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvwFarms.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lvwFarms.FullRowSelect = true;
-            listViewGroup6.Header = "刚成熟";
-            listViewGroup6.Name = "listViewGroup1";
-            listViewGroup7.Header = "即将收获";
-            listViewGroup7.Name = "listViewGroup2";
-            listViewGroup8.Header = "一小时以内";
-            listViewGroup8.Name = "listViewGroup3";
-            listViewGroup9.Header = "四小时以内";
-            listViewGroup9.Name = "listViewGroup4";
-            listViewGroup10.Header = "四小时以后";
-            listViewGroup10.Name = "listViewGroup5";
+            listViewGroup1.Header = "刚成熟";
+            listViewGroup1.Name = "listViewGroup1";
+            listViewGroup2.Header = "即将收获";
+            listViewGroup2.Name = "listViewGroup2";
+            listViewGroup3.Header = "一小时以内";
+            listViewGroup3.Name = "listViewGroup3";
+            listViewGroup4.Header = "四小时以内";
+            listViewGroup4.Name = "listViewGroup4";
+            listViewGroup5.Header = "四小时以后";
+            listViewGroup5.Name = "listViewGroup5";
             this.lvwFarms.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup6,
-            listViewGroup7,
-            listViewGroup8,
-            listViewGroup9,
-            listViewGroup10});
-            this.lvwFarms.LargeImageList = this.imgProduct;
+            listViewGroup1,
+            listViewGroup2,
+            listViewGroup3,
+            listViewGroup4,
+            listViewGroup5});
+            this.lvwFarms.LargeImageList = this.imgView;
             this.lvwFarms.Location = new System.Drawing.Point(0, 24);
             this.lvwFarms.MultiSelect = false;
             this.lvwFarms.Name = "lvwFarms";
             this.lvwFarms.Size = new System.Drawing.Size(236, 365);
-            this.lvwFarms.SmallImageList = this.imgProduct;
+            this.lvwFarms.SmallImageList = this.imgView;
             this.lvwFarms.TabIndex = 5;
             this.lvwFarms.TileSize = new System.Drawing.Size(218, 64);
             this.lvwFarms.UseCompatibleStateImageBehavior = false;
@@ -663,22 +730,6 @@
             // columnHeader3
             // 
             this.columnHeader3.Text = "预计收益";
-            // 
-            // tsbHelpOnline
-            // 
-            this.tsbHelpOnline.Image = ((System.Drawing.Image)(resources.GetObject("tsbHelpOnline.Image")));
-            this.tsbHelpOnline.Name = "tsbHelpOnline";
-            this.tsbHelpOnline.Size = new System.Drawing.Size(153, 22);
-            this.tsbHelpOnline.Text = "在线帮助(&O)";
-            this.tsbHelpOnline.Click += new System.EventHandler(this.tsbHelpOnline_Click);
-            // 
-            // tsbHelpSuggest
-            // 
-            this.tsbHelpSuggest.Image = ((System.Drawing.Image)(resources.GetObject("tsbHelpSuggest.Image")));
-            this.tsbHelpSuggest.Name = "tsbHelpSuggest";
-            this.tsbHelpSuggest.Size = new System.Drawing.Size(153, 22);
-            this.tsbHelpSuggest.Text = "意见建议(&S)";
-            this.tsbHelpSuggest.Click += new System.EventHandler(this.tsbHelpSuggest_Click);
             // 
             // fViewUI
             // 
@@ -719,12 +770,11 @@
         private System.Windows.Forms.ToolStripButton tsbUIUser;
         private System.Windows.Forms.ToolStripButton tsbUIHistory;
         private System.Windows.Forms.ToolStrip tbsOptions;
-        private System.Windows.Forms.ImageList imgProduct;
         private System.Windows.Forms.ToolStripButton tsbTopMost;
         private System.Windows.Forms.ToolStripButton tsbCapture;
         private System.Windows.Forms.ToolStripDropDownButton tsbDisplay;
         private System.Windows.Forms.ToolStripDropDownButton tsbNotify;
-        private System.Windows.Forms.ToolStripDropDownButton l;
+        private System.Windows.Forms.ToolStripDropDownButton tsbOptions;
         private System.Windows.Forms.ToolStripMenuItem tsbTimeMode;
         private System.Windows.Forms.ToolStripMenuItem tsbTimeExactly;
         private System.Windows.Forms.ToolStripMenuItem tsbTimeCountdown;
@@ -776,5 +826,12 @@
         private System.Windows.Forms.ToolStripMenuItem tsbHelpDeveloper;
         private System.Windows.Forms.ToolStripMenuItem tsbHelpOnline;
         private System.Windows.Forms.ToolStripMenuItem tsbHelpSuggest;
+        private System.Windows.Forms.ToolStripMenuItem tsbTileSize;
+        private System.Windows.Forms.ToolStripMenuItem tsbTileLarge;
+        private System.Windows.Forms.ToolStripMenuItem tsbTileMedium;
+        private System.Windows.Forms.ToolStripMenuItem tsbTileSmall;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
+        public System.Windows.Forms.ImageList imgProduct;
+        private System.Windows.Forms.ImageList imgView;
     }
 }
