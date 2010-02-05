@@ -48,7 +48,7 @@ namespace FarmTick
             Graphics g = Graphics.FromImage(b);
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
-            g.DrawImageUnscaled(image, (262 - image.Width) / 2, 54);
+            if (image != null) g.DrawImageUnscaled(image, (262 - image.Width) / 2, 54);
 
             SizeF size = g.MeasureString(ric.OwnerName, fontTitle);
             g.DrawString(ric.OwnerName, fontTitle, Brushes.Black, (262 - size.Width) / 2, 118);
