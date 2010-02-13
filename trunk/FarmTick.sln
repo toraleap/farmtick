@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmTick", "FarmTick\FarmTick.csproj", "{67E8BD7C-AAA5-48AD-AD4C-61923B725F7A}"
 EndProject
 Global
