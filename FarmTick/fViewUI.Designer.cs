@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fViewUI));
             System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("刚成熟", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("即将收获", System.Windows.Forms.HorizontalAlignment.Left);
@@ -87,25 +88,25 @@
             this.tsbHelpDeveloper = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbHelpOnline = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbHelpSuggest = new System.Windows.Forms.ToolStripMenuItem();
-            this.imgProduct = new System.Windows.Forms.ImageList();
-            this.nfyIcon = new System.Windows.Forms.NotifyIcon();
-            this.cmsIcon = new System.Windows.Forms.ContextMenuStrip();
+            this.imgProduct = new System.Windows.Forms.ImageList(this.components);
+            this.nfyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.cmsIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsbActivateWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.tmrUpdate = new System.Windows.Forms.Timer();
-            this.tmrAlarm = new System.Windows.Forms.Timer();
-            this.tmrAlarm2 = new System.Windows.Forms.Timer();
-            this.tmrNotifyIcon = new System.Windows.Forms.Timer();
-            this.tmrDock = new System.Windows.Forms.Timer();
-            this.cmsTime = new System.Windows.Forms.ContextMenuStrip();
+            this.tmrUpdate = new System.Windows.Forms.Timer(this.components);
+            this.tmrAlarm = new System.Windows.Forms.Timer(this.components);
+            this.tmrAlarm2 = new System.Windows.Forms.Timer(this.components);
+            this.tmrNotifyIcon = new System.Windows.Forms.Timer(this.components);
+            this.tmrDock = new System.Windows.Forms.Timer(this.components);
+            this.cmsTime = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsbViewStatistics = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbViewUserProduct = new System.Windows.Forms.ToolStripMenuItem();
-            this.imgView = new System.Windows.Forms.ImageList();
+            this.imgView = new System.Windows.Forms.ImageList(this.components);
             this.lvwFarms = new FarmTick.DoubleBufferedListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.tbsView.SuspendLayout();
             this.tbsOptions.SuspendLayout();
             this.cmsIcon.SuspendLayout();
@@ -593,7 +594,7 @@
             // 
             this.nfyIcon.ContextMenuStrip = this.cmsIcon;
             this.nfyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("nfyIcon.Icon")));
-            this.nfyIcon.Text = "FarmTick v1.0";
+            this.nfyIcon.Text = "FarmTick v1.02";
             this.nfyIcon.Visible = true;
             this.nfyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.nfyIcon_MouseDoubleClick);
             // 
@@ -688,7 +689,7 @@
             this.columnHeader2,
             this.columnHeader3});
             this.lvwFarms.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvwFarms.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lvwFarms.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lvwFarms.FullRowSelect = true;
             listViewGroup1.Header = "刚成熟";
             listViewGroup1.Name = "listViewGroup1";
@@ -744,11 +745,11 @@
             this.MinimumSize = new System.Drawing.Size(252, 172);
             this.Name = "fViewUI";
             this.ShowInTaskbar = false;
-            this.Text = "FarmTick v1.0";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fViewUI_FormClosed);
+            this.Text = "FarmTick v1.02";
             this.Load += new System.EventHandler(this.fViewUI_Load);
-            this.LocationChanged += new System.EventHandler(this.fViewUI_LocationChanged);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fViewUI_FormClosed);
             this.Resize += new System.EventHandler(this.fViewUI_Resize);
+            this.LocationChanged += new System.EventHandler(this.fViewUI_LocationChanged);
             this.tbsView.ResumeLayout(false);
             this.tbsView.PerformLayout();
             this.tbsOptions.ResumeLayout(false);
