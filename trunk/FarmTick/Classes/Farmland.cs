@@ -15,7 +15,7 @@ namespace FarmTick
         public int ServerTime;
         static Regex regexsource = new Regex(@"(?:http://)?nc\.(?<source>xiaoyou|qzone)\.qq\.com/cgi-bin/cgi_farm_index\?mod=user&act=run");
         static Regex regexuid = new Regex(@"(?:http://)?nc\.(?<source>xiaoyou|qzone)\.qq\.com/cgi-bin/cgi_farm_index\?mod=user&act=run.*?&ownerId=(?<ownerid>\d+)");
-        static Regex regexmaster = new Regex(@"""uId"":(?<uid>\d+),""userName"":""(?<username>.*?)""");
+        static Regex regexmaster = new Regex(@"""uId"":(?<uid>\d+),(?:""uinLogin"":\d+,)?""userName"":""(?<username>.*?)""");
         static Regex regexplant = new Regex(@"""farmlandStatus"":\[(?:(?<response>{.*?}),?)+\]");
         static Regex regexinfo = new Regex(@"(?:""isHungry"":(?<ishungry>\d)|""farmlandStatus"").*?""serverTime"":(?<servertime>\d+)");
 
