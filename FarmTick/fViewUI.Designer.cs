@@ -594,7 +594,7 @@
             // 
             this.nfyIcon.ContextMenuStrip = this.cmsIcon;
             this.nfyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("nfyIcon.Icon")));
-            this.nfyIcon.Text = "FarmTick v1.02";
+            this.nfyIcon.Text = "FarmTick v1.03";
             this.nfyIcon.Visible = true;
             this.nfyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.nfyIcon_MouseDoubleClick);
             // 
@@ -745,7 +745,7 @@
             this.MinimumSize = new System.Drawing.Size(252, 172);
             this.Name = "fViewUI";
             this.ShowInTaskbar = false;
-            this.Text = "FarmTick v1.02";
+            this.Text = "FarmTick v1.03";
             this.Load += new System.EventHandler(this.fViewUI_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fViewUI_FormClosed);
             this.Resize += new System.EventHandler(this.fViewUI_Resize);
